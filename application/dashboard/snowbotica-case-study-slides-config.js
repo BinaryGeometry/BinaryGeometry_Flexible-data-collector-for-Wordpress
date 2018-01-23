@@ -9,7 +9,7 @@ var SnowboticaSlidesConfig = angular.module('SnowboticaCaseStudySlidesConfig', [
 SnowboticaSlidesConfig.directive('tzEditSlideshow', ['$parse', function($parse){
     return {
         replace: true,
-        templateUrl: snowboticaSlidesPartialsPath+'/backend/config-template.html',
+        templateUrl: snowboticaSlidesPartialsPath+'/dashboard/config-template.html',
         scope: {
           data: '=slideshowValue',
           name: '@slideshowName',
