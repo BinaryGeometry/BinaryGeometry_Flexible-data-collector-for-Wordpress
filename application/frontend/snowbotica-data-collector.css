@@ -1,0 +1,50 @@
+
+.snwb-multipart-form  {
+}
+.snwb-multipart-form form  {
+}
+.snwb-multipart-form form .wrapper  {
+	background:orange;
+	height:400px;
+	position: relative;
+
+}
+.snwb-multipart-form form .wrapper .multipart-section {
+	padding:20px;
+	position: absolute;
+	background: green;
+	top:0;
+	left:0;
+	box-sizing: border-box;
+	width: 100%;
+}
+.snwb-multipart-form form .wrapper .multipart-section.arriving {
+}
+.snwb-multipart-form form .wrapper .multipart-section.leaving {
+
+}
+.snwb-multipart-form form .wrapper .multipart-section .form-element {
+}
+.snwb-multipart-form form .wrapper .multipart-section .form-element label {
+	/*background:blue;*/
+}
+.snwb-multipart-form form .wrapper .multipart-section .form-element input[type="text"],
+.snwb-multipart-form form .wrapper .multipart-section .form-element input[type="number"],
+.snwb-multipart-form form .wrapper .multipart-section .form-element input[type="email"],
+.snwb-multipart-form form .wrapper .multipart-section .form-element input[type="password"] {
+}
+.snwb-multipart-form form .wrapper .multipart-section .form-element textarea {
+}
+.snwb-multipart-form form .wrapper .multipart-section .form-element input[type="radio"] {
+}	
+.snwb-multipart-form form .wrapper .multipart-section .form-element label.radio-label {	
+}
+.snwb-next {
+
+}
+.snwb-back {
+
+}
+.snwb-submit {
+
+}

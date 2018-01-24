@@ -4,42 +4,42 @@
 /**
  * Adds a metabox to the right side of the screen under the â€œPublishâ€ box
  */
-function snowboticaCaseStudy_add_event_metaboxes() {
+function snowboticaDataCollector_add_event_metaboxes() {
 	add_meta_box(
-		'snowboticaCaseStudy_slides_meta',
-		'Event Location',
-		'snowboticaCaseStudy_slides_meta',
-		CASESTUDYPOSTTYPE,
+		'snowboticaDataCollector_slides_meta',
+		'Event meta_blob',
+		'snowboticaDataCollector_slides_meta',
+		SNwB_DATACOLLECTOR_POSTTYPE,
 		'advanced', 
 		'default'
 	);
 }
-add_action( 'add_meta_boxes', 'snowboticaCaseStudy_add_event_metaboxes' );
+add_action( 'add_meta_boxes', 'snowboticaDataCollector_add_event_metaboxes' );
 
 /**
  * Output the HTML for the metabox.
  */
-function snowboticaCaseStudy_slides_meta() {
+function snowboticaDataCollector_slides_meta() {
 	global $post;
 	// Nonce field to validate form request came from current site
-	wp_nonce_field( basename( __FILE__ ), 'snowboticaCaseStudy_fields' );
-	// Get the location data if it's already been entered
-	$location = get_post_meta( $post->ID, 'location', true );
+	wp_nonce_field( basename( __FILE__ ), 'snowboticaDataCollector_fields' );
+	// Get the meta_blob data if it's already been entered
+	$meta_blob = get_post_meta( $post->ID, 'meta_blob', true );
 	
-	if($location == ''){
-		$location = '{"settings": {"width":"contained", "show_captions":true}, "slides":[{"image_id":734, "caption":"Slide One"},{"image_id":735, "caption":"Slide Two"}]}'; 
+	if($meta_blob == ''){
+		$meta_blob = '{"settings": {"width":"contained", "show_captions":true}, "slides":[{"image_id":734, "caption":"Slide One"},{"image_id":735, "caption":"Slide Two"}]}'; 
 
 	}
 	// Output the field
-	// <input type="text" name="location" value="<?php esc_textarea( $location ); ? >" class="widefat">
+	// <input type="text" name="meta_blob" value="<?php esc_textarea( $meta_blob ); ? >" class="widefat">
 	// slideshow-id="nwbt_tz_setting[nwbt_tz_textarea_field_0]"
 	?>
 
 	 	<h2>Configure Slides here</h2>
-		<section ng-app="SnowboticaCaseStudySlidesConfig">
+		<section ng-app="SnowboticaDataCollectorSlidesConfig">
 	 		<tz-edit-slideshow 
-	 		slideshow-name="location"
-	 		slideshow-value='<?php  echo $location; ?>'
+	 		slideshow-name="meta_blob"
+	 		slideshow-value='<?php  echo $meta_blob; ?>'
 	 	></tz-edit-slideshow>
 	 	</section>
 	<?php
@@ -54,20 +54,20 @@ function snowboticaCaseStudy_slides_meta() {
 /**
  * Save the metabox data
  */
-function snowboticaCaseStudy_save_slides_meta( $post_id, $post ) {
+function snowboticaDataCollector_save_slides_meta( $post_id, $post ) {
 	// Return if the user doesn't have edit permissions.
 	if ( ! current_user_can( 'edit_post', $post_id ) ) {
 		return $post_id;
 	}
 	// Verify this came from the our screen and with proper authorization,
 	// because save_post can be triggered at other times.
-	if ( ! isset( $_POST['location'] ) || ! wp_verify_nonce( $_POST['snowboticaCaseStudy_fields'], basename(__FILE__) ) ) {
+	if ( ! isset( $_POST['meta_blob'] ) || ! wp_verify_nonce( $_POST['snowboticaDataCollector_fields'], basename(__FILE__) ) ) {
 		return $post_id;
 	}
 	// Now that we're authenticated, time to save the data.
 	// This sanitizes the data from the field and saves it into an array $events_meta.
-	// $events_meta['location'] = esc_textarea( $_POST['location'] );
-	$events_meta['location'] = $_POST['location'] ;
+	// $events_meta['meta_blob'] = esc_textarea( $_POST['meta_blob'] );
+	$events_meta['meta_blob'] = $_POST['meta_blob'] ;
 	// $mysqli->set_charset("utf8");
 	// Cycle through the $events_meta array.
 	// Note, in this example we just have one item, but this is helpful if you have multiple.
@@ -89,4 +89,4 @@ function snowboticaCaseStudy_save_slides_meta( $post_id, $post ) {
 		}
 	endforeach;
 }
-add_action( 'save_post', 'snowboticaCaseStudy_save_slides_meta', 1, 2 );
+add_action( 'save_post', 'snowboticaDataCollector_save_slides_meta', 1, 2 );

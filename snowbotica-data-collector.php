@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: Snowbotica Case Study
+Plugin Name: Snowbotica Data Collector
 Plugin URI: http://binarygeometry.co.uk/products/snowbotica-case-study
 Description: Creates a custom post type with built in presentation slideshow
 Author: Andrew MacKay
@@ -8,25 +8,27 @@ Version: 1.2.3
 Author URI: http://binarygeometry.co.uk/
 */
 
-define( 'SNOWBOTICASLIDES', plugin_dir_path( __FILE__ ) );
-define( 'SNOWBOTICASLIDES_URL', plugin_dir_url( __FILE__ ) );
+define( 'SNwB_DATACOLLECTOR', plugin_dir_path( __FILE__ ) );
+define( 'SNwB_DATACOLLECTOR_URL', plugin_dir_url( __FILE__ ) );
 
-define( 'CASESTUDYPOSTTYPE', 'snwb_case_study' );
-define( 'CASESTUDYSLUG', 'case-study' );
+define( 'SNwB_DATACOLLECTOR_POSTTYPE', 'snwb_data_collector' );
+define( 'SNwB_DATACOLLECTOR_SLUG', 'collected-data' );
 
+define( 'SNwB_DATACOLLECTOR_TEMPLATE', 'data_collector-template.php' );
+define( 'SNwB_DATACOLLECTOR_TEMPLATE_NAME', 'SNWB Form Template' );
 
 # Included parts
 /* Registration hooks and functions for browser assets */
-include( SNOWBOTICASLIDES . '/parts/include-scripts-and-styles.php');
+include( SNwB_DATACOLLECTOR . '/parts/include-scripts-and-styles.php');
 
 /* Adds a new custom post type to the dashboard and tells Wordpress where to find the template files */
-include( SNOWBOTICASLIDES . '/parts/set-up-post-type-with-templates.php');
-
-/* Adds a custom sidebar to the post type archive template */
-include( SNOWBOTICASLIDES . '/parts/set-up-sidebar.php');
+include( SNwB_DATACOLLECTOR . '/parts/set-up-post-type-with-templates.php');
 
 /* Makes the post type archive available in the Wordpress menu builder */
-include( SNOWBOTICASLIDES . '/parts/set-up-menu-listing.php');
+// include( SNwB_DATACOLLECTOR . '/parts/set-up-menu-listing.php'); // not not break other plugin
 
 /* Uses post meta and Angularjs to attach a presentation slideshow configuration box to post edit screen */
-include( SNOWBOTICASLIDES . '/parts/slide-in-custom-posts.php');
+include( SNwB_DATACOLLECTOR . '/parts/post-meta-set-up.php');
+
+/* Adds a custom sidebar to the post type archive template */
+// include( SNwB_DATACOLLECTOR . '/parts/set-up-sidebar.php');
