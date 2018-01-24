@@ -24,11 +24,11 @@ include( SNwB_DATACOLLECTOR . '/parts/include-scripts-and-styles.php');
 /* Adds a new custom post type to the dashboard and tells Wordpress where to find the template files */
 include( SNwB_DATACOLLECTOR . '/parts/set-up-post-type-with-templates.php');
 
-/* Makes the post type archive available in the Wordpress menu builder */
-// include( SNwB_DATACOLLECTOR . '/parts/set-up-menu-listing.php'); // not not break other plugin
+/* Adds a custom sidebar to the included form template page */
+// include( SNwB_DATACOLLECTOR . '/parts/set-up-sidebar.php');
 
 /* Uses post meta and Angularjs to attach a presentation slideshow configuration box to post edit screen */
-include( SNwB_DATACOLLECTOR . '/parts/post-meta-set-up.php');
+// include( SNwB_DATACOLLECTOR . '/parts/post-meta-set-up.php');
 
-/* Adds a custom sidebar to the post type archive template */
-// include( SNwB_DATACOLLECTOR . '/parts/set-up-sidebar.php');
+/* Wordpress admin ajax functions for submitting and validating form */
+include( SNwB_DATACOLLECTOR . '/parts/admin-ajax-endpoints-for-form.php');
