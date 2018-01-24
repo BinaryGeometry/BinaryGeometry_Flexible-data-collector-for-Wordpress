@@ -5,7 +5,9 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 (function( $ ) {
  	var target = '.snwb-multipart-form form .wrapper';
  	// a useful object
- 	var list = []
+ 	var list = [];
+
+ 	
 
  	 	
  		$(target).find('.multipart-section').each(function(){
@@ -95,12 +97,12 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
  		
  			// only show first section of form
  			if( $formSection.data('position') != 1){
- 				// $formSection.hide()
+ 				$formSection.hide()
  			} 
  			
  	
  		})
- 		
+ 		$('.dob-datepicker').Zebra_DatePicker();
 
 
  		

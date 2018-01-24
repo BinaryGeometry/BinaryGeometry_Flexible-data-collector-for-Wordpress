@@ -29,8 +29,8 @@ function snwb_datacollector_save_form(){
   
 
   // function insertIntoDatabase($form_data){
-  //   global $wpdb;
-  //   // json_encode($form_data['form_type']);
+    // global $wpdb;
+    // json_encode($form_data['form_type']);
   //   // set by the database // id mediumint(9) NOT NULL AUTO_INCREMENT,
   //   $data = array(
   //     'form_type' => $form_data->formType,
