@@ -25,7 +25,7 @@ get_header(); ?>
 		  	<section class="snwb-multipart-form">
 				<form>
 					<div class="wrapper">
-						<div class="multipart-section" data-position="1">
+					<!-- 	<div class="multipart-section" data-position="1">
 							<div class="form-element">
 								<label>Your Name</label>
 								<input type="text" name="Name" data-validate="required" tabindex=1 />
@@ -52,7 +52,7 @@ get_header(); ?>
 							</div>
 							<a href="" class="snwb-back" data-goto="1">Back</a>
 							<a href="" class="snwb-next" data-goto="3" tabindex=8>Continue</a>
-						</div>
+						</div> -->
 						<div class="multipart-section" data-position="3">
 							<div class="form-element">
 								<label>Would you like to leave a telephone number?</label>

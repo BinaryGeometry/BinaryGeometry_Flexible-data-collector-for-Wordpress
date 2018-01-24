@@ -17,6 +17,12 @@ if ( ! function_exists( 'snowbotica_data_collector_frontend_assets' ) ) {
         
         wp_enqueue_script( 'snowbotica-data-collector_js', SNwB_DATACOLLECTOR_URL .  'application/frontend/snowbotica-data-collector.js', array(), 'jquery', true); 
     
+        wp_localize_script( 'snowbotica-data-collector_js', 'snwb_datacollector_api_object', array( 
+          'ajax_nonce' => wp_create_nonce('snowbotica-data-collector'),
+          'ajax_url'   => admin_url( 'admin-ajax.php' ) ,
+          // 'partials_path'  => SNwB_DATACOLLECTOR_URL .  '/application/' ,
+
+        ));
       }
     }
 }
