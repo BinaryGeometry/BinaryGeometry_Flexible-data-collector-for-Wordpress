@@ -50,7 +50,7 @@ get_header(); ?>
 							<a href="" class="snwb-back" data-goto="1">Back</a>
 							<a href="" class="snwb-next" data-goto="3">Continue</a>
 						</div>
-						<!-- <div class="multipart-section" data-position="3">
+						<div class="multipart-section" data-position="3">
 							<div class="form-element">
 								<label>Would you like to leave a telephone number?</label>
 								<input type="number" name="telephone" data-validate="optional">
@@ -59,8 +59,9 @@ get_header(); ?>
 								<label>Any comments?</label>
 								<textarea name="comments" data-validate="optional"></textarea>
 							</div>
-							<input type="submit" class="snwb-submit">Submit</a>
-						</div> -->
+							<a href="" class="snwb-back" data-goto="2345">Back</a>
+							<input type="submit" class="snwb-submit" value="Send">
+						</div>
 					</div>
 				</form>
 	 		</section>

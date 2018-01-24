@@ -4,7 +4,8 @@
 .snwb-multipart-form form  {
 }
 .snwb-multipart-form form .wrapper  {
-	background:orange;
+	background:white;
+	border:1px solid #a3c2d8;
 	height:400px;
 	position: relative;
 
@@ -12,7 +13,7 @@
 .snwb-multipart-form form .wrapper .multipart-section {
 	padding:20px;
 	position: absolute;
-	background: green;
+	/*background: green;*/
 	top:0;
 	left:0;
 	box-sizing: border-box;
@@ -39,12 +40,27 @@
 }	
 .snwb-multipart-form form .wrapper .multipart-section .form-element label.radio-label {	
 }
-.snwb-next {
+
+.snwb-next,
+.snwb-submit,
+.snwb-back {
+	background: white;
+    padding: 5px 10px;
+    border:1px solid #a3c2d8;
+    color:#443d46;
+    /*text-transform: uppercase;	*/
 
 }
+.snwb-next {
+    font-weight:bold;
+	float: 	right;	
+}
 .snwb-back {
+	float: 	left;	
 
 }
 .snwb-submit {
+    font-weight:bold;
+	float: 	right;	
 
 }
