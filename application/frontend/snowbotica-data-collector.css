@@ -2,22 +2,34 @@
 .snwb-multipart-form  {
 }
 .snwb-multipart-form form  {
+	/*overflow: hidden;*/
+	width: 100%;
+	min-width: 100%;
 }
 .snwb-multipart-form form .wrapper  {
+	min-width: 100%;
 	background:white;
+	/*overflow: hidden; this breaks the functionality for some reason not currently understood */
 	border:1px solid #a3c2d8;
 	height:400px;
 	position: relative;
-
+	width: 100%;
 }
 .snwb-multipart-form form .wrapper .multipart-section {
 	padding:20px;
 	position: absolute;
-	/*background: green;*/
-	top:0;
-	left:0;
 	box-sizing: border-box;
 	width: 100%;
+	background: red;
+	position: absolute;
+/*	left:0 !important;
+	right:0 !important;*/
+	top:10px;
+	-website-transition:left 1s linear;
+	transition:left 2s linear;
+}
+.snwb-multipart-form form .wrapper .multipart-section.current {
+
 }
 .snwb-multipart-form form .wrapper .multipart-section.arriving {
 }

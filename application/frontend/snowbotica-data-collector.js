@@ -6,8 +6,8 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
  	var target = '.snwb-multipart-form form .wrapper';
  	// a useful object
  	var list = [];
-
- 	
+ 	var width = $(target).width();
+ 	console.log(width);
 
  	 	
  		$(target).find('.multipart-section').each(function(){
@@ -55,9 +55,14 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
  			// form:moveForward
  			$formSection.on('form:moveForward', function(event, position, tabIndex){ 
  				console.log('moving forward from: ', position, tabIndex)
- 				// change to new form section
- 				$(target).find('.multipart-section[data-position="'+position+'"]').hide();
- 				$(target).find('.multipart-section[data-position="'+(position + 1)+'"]').show();
+ 				// move this off left
+ 				$(target).find('.multipart-section[data-position="'+position+'"]').css({
+ 					left: -width+'px'
+ 				});	
+ 				// move this to middle
+ 				$(target).find('.multipart-section[data-position="'+(position + 1)+'"]').css({
+ 					left: '0px'
+ 				});
  				// focus on topmost form element
  				$(target).find('.multipart-section[data-position="'+(position + 1)+'"]')
  				.find(':input[tabindex='+tabIndex+']').focus();
@@ -68,8 +73,14 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
  			$formSection.on('form:moveBackward', function(event, position, tabIndex){ 
  				console.log('moving backward from: ', position, tabIndex)
  				// change to previous form section
- 				$(target).find('.multipart-section[data-position="'+position+'"]').hide()
- 				$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').show()
+ 				// move this off left
+ 				$(target).find('.multipart-section[data-position="'+position+'"]').css({
+ 					left:width+'px'
+ 				});
+ 				$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').css({
+ 					left:'0px'
+
+ 				});
  				
  				// focus on topmost form element
  				$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').show()
@@ -97,8 +108,15 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
  		
  			// only show first section of form
  			if( $formSection.data('position') != 1){
- 				$formSection.hide()
- 			} 
+ 				// $formSection.hide()
+ 				$formSection.css({
+ 					left: width+'px'
+ 				})
+ 			} else {
+ 				$formSection.css({
+ 					left: '0px'
+ 				})
+ 			}
  			
  	
  		})

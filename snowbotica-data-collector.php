@@ -32,3 +32,5 @@ include( SNwB_DATACOLLECTOR . '/parts/set-up-post-type-with-templates.php');
 
 /* Wordpress admin ajax functions for submitting and validating form */
 include( SNwB_DATACOLLECTOR . '/parts/admin-ajax-endpoints-for-form.php');
+
+// include( SNwB_DATACOLLECTOR . '/parts/set-up-db.php');
