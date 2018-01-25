@@ -29,11 +29,11 @@ get_header(); ?>
 							<article>
 								<div class="form-element">
 									<label>Your Name</label>
-									<input type="text" name="Name" data-validate="required" tabindex=1>
+									<input type="text" name="name" data-validate="required" tabindex=1>
 								</div>
 								<div class="form-element">
 									<label>Your Email</label>
-									<input type="email" name="Email" data-validate="required email" tabindex=2>
+									<input type="email" name="email" data-validate="required email" tabindex=2>
 								</div>
 								<a href="" class="snwb-next" tabindex=3>Continue</a>
 							</article>
@@ -42,11 +42,11 @@ get_header(); ?>
 							<article>
 								<div class="form-element">
 									<label>Gender</label>
-									<input type="radio" name="gender" value="female" data-validate="optional" tabindex=4>
+									<input type="radio" id="female" name="gender" value="female" data-validate="optional" tabindex=4>
 									<label class="radio-label" for="female" >Female</label><br>
-									<input type="radio" name="gender" value="male" data-validate="optional" tabindex=5>
+									<input type="radio" id="male" name="gender" value="male" data-validate="optional" tabindex=5>
 									<label class="radio-label" for="male">Male</label><br>
-									<input type="radio" name="gender" value="non-binary" data-validate="optional" tabindex=6>
+									<input type="radio" id="non-binary" name="gender" value="non-binary" data-validate="optional" tabindex=6>
 									<label class="radio-label" for="non-binary">Non Binary</label>
 								</div>
 								<div class="form-element">

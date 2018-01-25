@@ -7,26 +7,61 @@
   * @return json Object with complete data and reference to stored id.
   */
 
- // data = $("form").serialize();
- //        console.log(data, snwbDatacollectorAjaxUrl, snwbDatacollectorAjaxNonce)
- //        jQuery.ajax({
- //                    type: 'POST',
- //                    url: snwbDatacollectorAjaxUrl,
- //                    data: {
- //                      action: 'snwb_datacollector_handle_form', 
- //                      security: snwbDatacollectorAjaxNonce,
- //                      data: data
- //                    },
 function snwb_datacollector_save_form(){
   //   // Standard wordpress security to stop crsf attacks
   check_ajax_referer( 'snowbotica-data-collector', 'security' );
 
   // Recieve the returned form data and convert to useable type
   $rawData = $_REQUEST['data'] ;
+  $output = array();
   parse_str($rawData, $output);
 
-  print_r($output['comments']);
+  // save the post data to array
+  // VALIDATION GOES HERE
+  $postInfo = array(
+    'name'   => $output['name'],
+    'email'   => $output['email'],
+    'gender' => $output['gender'], 
+    'dob'    => $output['dob'], 
+    'telephone' => $output['telephone'], 
+    'comments'  => $output['comments'],
+  );
+  // IF VALID
+
+  /* Create post */
+  // echo CASESTUDYPOSTTYPE;
+ 
+  // Create post object
+  $my_post = array(
+    'post_title'      => $postInfo['name'].' - '.$postInfo['email'].' - '.$postInfo['telephone'],
+    'post_content'    => print_r($postInfo, true),
+    'post_status'     => 'publish',
+    'comment-status'  => 'closed',
+    'ping-status'     => 'closed',
+    'post_author'     => 1,
+    'post_type'       => SNwB_DATACOLLECTOR_POSTTYPE
+  );
+     
+  $post_id = wp_insert_post( $my_post );
+
+  if (is_wp_error($post_id)) {
+    $errors = $post_id->get_error_messages();
+    foreach ($errors as $error) {
+        echo "- " . $error . "<br />";
+    }
+  }
   
+  // echo $post_id;
+
+  // zoom big and fade form page
+  // zoom normal from small and fade in other page
+
+  echo "Thank you - you are number $post_id. Someone will be in touch shortly";
+    // Insert the post into the database and get the resulting id back... 
+     // __update_post_meta( $the_post_id, 'my-custom-field', 'my_custom_field_value' );
+  
+    /* Create entry in custom table */
+
 
   // function insertIntoDatabase($form_data){
     // global $wpdb;
@@ -55,6 +90,7 @@ function snwb_datacollector_save_form(){
   //   echo json_encode($data);
   // }
   // insertIntoDatabase($form_data);
+    /* Associate custom table to post meta */
     
   wp_die();
 }

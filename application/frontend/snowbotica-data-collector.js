@@ -13,7 +13,6 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
  	// });
  	// $(target).append('<h1 style="width:100%">titld</h1>')
 
- 	 	
  		$(target).find('.multipart-section').each(function(){
  			var $formSection = $(this); // the current section
  			var position = $formSection.data('position'); // the position of the current section

@@ -24,6 +24,9 @@ include( SNwB_DATACOLLECTOR . '/parts/include-scripts-and-styles.php');
 /* Adds a new custom post type to the dashboard and tells Wordpress where to find the template files */
 include( SNwB_DATACOLLECTOR . '/parts/set-up-post-type-with-templates.php');
 
+/* Uses wpdb to add a new database table to store our data */
+include( SNwB_DATACOLLECTOR . '/parts/create-database-table.php');
+
 /* Adds a custom sidebar to the included form template page */
 // include( SNwB_DATACOLLECTOR . '/parts/set-up-sidebar.php');
 
@@ -32,5 +35,3 @@ include( SNwB_DATACOLLECTOR . '/parts/set-up-post-type-with-templates.php');
 
 /* Wordpress admin ajax functions for submitting and validating form */
 include( SNwB_DATACOLLECTOR . '/parts/admin-ajax-endpoints-for-form.php');
-
-// include( SNwB_DATACOLLECTOR . '/parts/set-up-db.php');
