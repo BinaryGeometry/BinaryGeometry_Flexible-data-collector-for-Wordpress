@@ -8,6 +8,10 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
  	var list = [];
  	var width = $(target).width();
  	console.log(width);
+ 	// $(target).css({
+ 	// 	'min-width':width+'px'
+ 	// });
+ 	// $(target).append('<h1 style="width:100%">titld</h1>')
 
  	 	
  		$(target).find('.multipart-section').each(function(){
@@ -55,17 +59,17 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
  			// form:moveForward
  			$formSection.on('form:moveForward', function(event, position, tabIndex){ 
  				console.log('moving forward from: ', position, tabIndex)
- 				// move this off left
+ 				// move current/previous slide off left
  				$(target).find('.multipart-section[data-position="'+position+'"]').css({
  					left: -width+'px'
- 				});	
- 				// move this to middle
+ 				});
+ 				// move next slide to middle
  				$(target).find('.multipart-section[data-position="'+(position + 1)+'"]').css({
  					left: '0px'
- 				});
+ 				});	
  				// focus on topmost form element
- 				$(target).find('.multipart-section[data-position="'+(position + 1)+'"]')
- 				.find(':input[tabindex='+tabIndex+']').focus();
+ 				// $(target).find('.multipart-section[data-position="'+(position + 1)+'"]')
+ 				// .find(':input[tabindex='+tabIndex+']').focus();
 
  			});
 
