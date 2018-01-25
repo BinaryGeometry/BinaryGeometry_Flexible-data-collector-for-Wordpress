@@ -1,20 +1,20 @@
-# Snowbotica Case Study
+# Snowbotica Data Collector
 
-### A custom post type with slideshow presentation
+### A custom post type created by flexible multipart form
 
 The plugin aims to be functional out of the box and a practical easy to modify jumping off point for customisation and development.
 
 ## Features
 
-* Creates new post type 'Case Study'
-* Adds Archive and Single templates for post type
-* Adds post type archive page to menu chooser
-* Adds minimal angular 'Configure Slideshow' application to post edit screen using meta data
-* Adds Widget area for Archive page
-* Adds 'Slick' slideshow to Single post [configurable in code]
+* Creates new post type 'Collected Data'
+* Creates custom database table to store form data in a flexible and extendible way
+* Adds frontend page template 
+* Provides and easy to extend and configure mulitpart form
+* Animates in thank you message when form submits
 
 ## Todo
 
-* Add image chooser to slideshow directive [currently requires pasting of image id]
-* Add ability to reorder slides using drag and drop
-* Make templates behave consistently on smaller screens
+* Server and client side form validation
+* Date chooser needs configured to make selecting year easier
+* Add support for select, checkbox and media upload form inputs
+* Database table to be associated with custom post
