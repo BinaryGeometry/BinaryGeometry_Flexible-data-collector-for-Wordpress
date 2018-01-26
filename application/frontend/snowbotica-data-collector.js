@@ -61,33 +61,76 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 
 
 (function( $ ) {
-	// var validator = new FormValidator('snwb_dataCollector_validate_this', [
-	// {
-	//     name: 'name',
-	//     display: 'required',
-	//     rules: 'required|double_barrel'
-	// } 
-	// ], function(errors, event) {
-	//     if (errors.length > 0) {
-	//         // Show the errors
-	//     }
-	// });
 
-	// validator.registerCallback('double_barrel', function(value) {
-	// 	var valid = /\s/;
-	// 	var value = value;
-	// 	var k = valid.test(value);
-	// 	alert(k);
-	//     if (k) {
-	//         return true;
-	//     }
+	var validator = new FormValidator('snwb_dataCollector_validate_this', [
+		{
+		    name: 'name',
+		    display: 'Name',
+		    rules: 'required|callback_double_barrel'
+		},
+		{
+	    	name: 'email',
+	    	display: 'Email',
+	    	rules: 'required|valid_email'
+		},
+		{
+	    	name: 'gender',
+	    	display: 'Gender',
+	    	rules: 'required'
+		},
+		{
+	    	name: 'dob',
+	    	display: 'Date of Birth',
+	    	rules: 'required|callback_date'
+		},
+		{
+	    	name: 'telephone',
+	    	display: 'Telephone number',
+	    	rules: 'required|numeric'
+		},
+		{
+	    	name: 'comments',
+	    	display: 'Comments',
+	    	rules: 'required'
+	    	// rules: 'callback_snwb_comments'
+		}  
+	], function(errors, event) {
+	    if (errors.length > 0) {
+	    	console.log('errors', errors, event)	        
+	    }
+	});
 
-	//     return false;
-	// })
-	// validator.setMessage('double_barrel', "Please use both names");
+validator.registerCallback('double_barrel', function(value) {
+	var value = value,
+		valid = /\s/,
+		k = valid.test(value);
+    
+    if (k) {
+        return true;
+    }
+    return false;
+}).setMessage('double_barrel', "Please use both names");
+
+validator.registerCallback('date', function(value) {
+    var value = value,
+    	// valid = /^\d{2}([./-])\d{2}\1\d{4}$/, /* doesn't match date
+    	valid = value,
+    	k = valid.test(valid)
+    if (k) {
+    	return true;
+    }
+    return false;
+}).setMessage('date', "Please use a valid date");
+
+// validator.registerCallback('snwb_comments', function(value) {
+    // if (value !== '') {
+	   // 	return true;
+    // }
+
+//     return false;
+// }).setMessage('snwb_comments', "Please say something");
 
 	// validator.validateField('name');
-
  	var target = '.snwb-multipart-form form .wrapper',
  		$target = $(target),
  		section = '.multipart-section',
@@ -98,120 +141,120 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
  		width = $(target).width();
  	// a useful objective
 
-	$target.find('.multipart-section').each(function(){
+	// $target.find('.multipart-section').each(function(){
 		
-		var $formSection = $(this), // the current section
-			position = $formSection.data('position'); // the position of the current section
+	// 	var $formSection = $(this), // the current section
+	// 		position = $formSection.data('position'); // the position of the current section
 
-		// save position
-		list.push({position:position, element: $(this)});
+	// 	// save position
+	// 	list.push({position:position, element: $(this)});
 
-		// bind handlers to continue button
-		$formSection.find('.snwb-next').on('click', function(e){
-			e.preventDefault();
-			var $target = $(this).closest('.multipart-section');
+	// 	// bind handlers to continue button
+	// 	$formSection.find('.snwb-next').on('click', function(e){
+	// 		e.preventDefault();
+	// 		var $target = $(this).closest('.multipart-section');
 			
-			var tabIndex = (Number( $(this).attr('tabIndex') ) + 1);
+	// 		var tabIndex = (Number( $(this).attr('tabIndex') ) + 1);
 
-			$target.trigger('form:moveForward',[position, tabIndex]);
-		});
-		// bind handlers to back button
-		$formSection.find('.snwb-back').on('click', function(e){
-			e.preventDefault();
-			var $target = $(this).closest('.multipart-section');
+	// 		$target.trigger('form:moveForward',[position, tabIndex]);
+	// 	});
+	// 	// bind handlers to back button
+	// 	$formSection.find('.snwb-back').on('click', function(e){
+	// 		e.preventDefault();
+	// 		var $target = $(this).closest('.multipart-section');
 
-			// find first element in this section and subtract one from tabindex
-			var tabIndex = function(){
-				// get the previous form section by subtracting from current position
-				var $shortlist = $(target).find('.multipart-section[data-position="'+(position - 1)+'"]');
-				// hone in on the first form element (this could be radio group, select, texarea or input)
-				$shortlist = $shortlist.find('.form-element').first();
-				// now we find the first actual form element
-				var $item = $shortlist.find(':input').first() ;
-				var tabindex = $item.attr('tabIndex');
-				return tabindex;
-			}
-			$target.trigger('form:moveBackward',[position, tabIndex()]);
-		});
+	// 		// find first element in this section and subtract one from tabindex
+	// 		var tabIndex = function(){
+	// 			// get the previous form section by subtracting from current position
+	// 			var $shortlist = $(target).find('.multipart-section[data-position="'+(position - 1)+'"]');
+	// 			// hone in on the first form element (this could be radio group, select, texarea or input)
+	// 			$shortlist = $shortlist.find('.form-element').first();
+	// 			// now we find the first actual form element
+	// 			var $item = $shortlist.find(':input').first() ;
+	// 			var tabindex = $item.attr('tabIndex');
+	// 			return tabindex;
+	// 		}
+	// 		$target.trigger('form:moveBackward',[position, tabIndex()]);
+	// 	});
 
-		// only show first section of form
-		if( $formSection.data('position') != 3){
-			// $formSection.hide()
-			$formSection.css({
-				left: width+'px'
-			})
-		} else {
-			$formSection.css({
-				left: '0px'
-			})
-		}
-		
+	// 	// only show first section of form
+	// 	if( $formSection.data('position') != 3){
+	// 		// $formSection.hide()
+	// 		$formSection.css({
+	// 			left: width+'px'
+	// 		})
+	// 	} else {
+	// 		$formSection.css({
+	// 			left: '0px'
+	// 		})
+	// 	}
+	// });
 
+	$('.dob-datepicker').Zebra_DatePicker({
+		format: 'm-d-Y'
 	});
-
-	// $('.dob-datepicker').Zebra_DatePicker();
 
 	// bind submit handlers to form
-	$(form).on('submit', function(e){
+	// $(form).on('submit', function(e){
 		// e.preventDefault();
 
-		console.log('blah')
+		// console.log('blah')
 		// var $target = $(this).closest('.multipart-section');
 		// $target.trigger('form:submitForm');
-	});
+	// });
 
 	// form:moveForward
-	$sections.on('form:moveForward', function(event, position, tabIndex){ 
-		console.log('moving forward from: ', position, tabIndex)
-		// move current/previous slide off left
-		$(target).find('.multipart-section[data-position="'+position+'"]').css({
-			left: -width+'px'
-		});
-		// move next slide to middle
-		$(target).find('.multipart-section[data-position="'+(position + 1)+'"]').css({
-			left: '0px'
-		});	
-		// focus on topmost form element /* breaks carousel overflow
-		// $(target).find('.multipart-section[data-position="'+(position + 1)+'"]')
-		// .find(':input[tabindex='+tabIndex+']').focus();
-	});
-	// form:moveBackward
-	$sections.on('form:moveBackward', function(event, position, tabIndex){ 
-		console.log('moving backward from: ', position, tabIndex)
-		// change to previous form section
-		// move this off left
-		$(target).find('.multipart-section[data-position="'+position+'"]').css({
-			left:width+'px'
-		});
-		$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').css({
-			left:'0px'
+	// $sections.on('form:moveForward', function(event, position, tabIndex){ 
+	// 	console.log('moving forward from: ', position, tabIndex)
+	// 	// move current/previous slide off left
+	// 	$(target).find('.multipart-section[data-position="'+position+'"]').css({
+	// 		left: -width+'px'
+	// 	});
+	// 	// move next slide to middle
+	// 	$(target).find('.multipart-section[data-position="'+(position + 1)+'"]').css({
+	// 		left: '0px'
+	// 	});	
+	// 	// focus on topmost form element /* breaks carousel overflow
+	// 	// $(target).find('.multipart-section[data-position="'+(position + 1)+'"]')
+	// 	// .find(':input[tabindex='+tabIndex+']').focus();
+	// });
+	// // form:moveBackward
+	// $sections.on('form:moveBackward', function(event, position, tabIndex){ 
+	// 	console.log('moving backward from: ', position, tabIndex)
+	// 	// change to previous form section
+	// 	// move this off left
+	// 	$(target).find('.multipart-section[data-position="'+position+'"]').css({
+	// 		left:width+'px'
+	// 	});
+	// 	$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').css({
+	// 		left:'0px'
 
-		});
+	// 	});
 		
-		// focus on topmost form element
-		$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').show()
-		.find(':input[tabindex='+tabIndex+']').focus();
-	});
-	// form:submitForm
-	$form.on('form:submitForm', function(event){
-		console.log('form submitting')
-		// http://bin.geo/saved-form/?name=&email=&dob=&telephone=&comments=
-		var data = $("form").serialize();
+	// 	// focus on topmost form element
+	// 	$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').show()
+	// 	.find(':input[tabindex='+tabIndex+']').focus();
+	// });
+	// // form:submitForm
+	// $form.on('form:submitForm', function(event){
+	// 	console.log('form submitting')
+	// 	// http://bin.geo/saved-form/?name=&email=&dob=&telephone=&comments=
+	// 	var data = $("form").serialize();
 
-		console.log(data, snwbDatacollectorAjaxUrl, snwbDatacollectorAjaxNonce)
+	// 	console.log(data, snwbDatacollectorAjaxUrl, snwbDatacollectorAjaxNonce)
 		
-		jQuery.ajax({
-        	type: 'POST',
-        	url: snwbDatacollectorAjaxUrl,
-        	data: {
-        		action: 'snwb_datacollector_save_form', 
-        		security: snwbDatacollectorAjaxNonce,
-        		data: data
-        	},
-        	success: function (a) {
-            	console.log(a)
-        	}
-    	});
-	}); 
+	// 	jQuery.ajax({
+ //        	type: 'POST',
+ //        	url: snwbDatacollectorAjaxUrl,
+ //        	data: {
+ //        		action: 'snwb_datacollector_save_form', 
+ //        		security: snwbDatacollectorAjaxNonce,
+ //        		data: data
+ //        	},
+ //        	success: function (a) {
+ //            	console.log(a)
+ //        	}
+ //    	});
+	// }); 
  		
 })(jQuery);

@@ -12,7 +12,8 @@
 	width: 100%;
 	/*background:pink;*/
 	border:1px solid #a3c2d8;
-	height:400px;
+	height:800px;
+	float: left;
 	position: relative;
 }
 .snwb-multipart-form form .wrapper .multipart-section {
