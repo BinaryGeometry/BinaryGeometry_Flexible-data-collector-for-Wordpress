@@ -100,6 +100,8 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 	    }
 	});
 
+	console.log(validator)
+
 	validator.registerCallback('double_barrel', function(value) {
 		var value = value,
 			valid = /\s/,
@@ -145,117 +147,117 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
  		width = $(target).width();
  	// a useful objective
 
-	// $target.find('.multipart-section').each(function(){
+	$target.find('.multipart-section').each(function(){
 		
-	// 	var $formSection = $(this), // the current section
-	// 		position = $formSection.data('position'); // the position of the current section
+		var $formSection = $(this), // the current section
+			position = $formSection.data('position'); // the position of the current section
 
-	// 	// save position
-	// 	list.push({position:position, element: $(this)});
+		// save position
+		list.push({position:position, element: $(this)});
 
-	// 	// bind handlers to continue button
-	// 	$formSection.find('.snwb-next').on('click', function(e){
-	// 		e.preventDefault();
-	// 		var $target = $(this).closest('.multipart-section');
+		// bind handlers to continue button
+		$formSection.find('.snwb-next').on('click', function(e){
+			e.preventDefault();
+			var $target = $(this).closest('.multipart-section');
 			
-	// 		var tabIndex = (Number( $(this).attr('tabIndex') ) + 1);
+			var tabIndex = (Number( $(this).attr('tabIndex') ) + 1);
 
-	// 		$target.trigger('form:moveForward',[position, tabIndex]);
-	// 	});
-	// 	// bind handlers to back button
-	// 	$formSection.find('.snwb-back').on('click', function(e){
-	// 		e.preventDefault();
-	// 		var $target = $(this).closest('.multipart-section');
+			$target.trigger('form:moveForward',[position, tabIndex]);
+		});
+		// bind handlers to back button
+		$formSection.find('.snwb-back').on('click', function(e){
+			e.preventDefault();
+			var $target = $(this).closest('.multipart-section');
 
-	// 		// find first element in this section and subtract one from tabindex
-	// 		var tabIndex = function(){
-	// 			// get the previous form section by subtracting from current position
-	// 			var $shortlist = $(target).find('.multipart-section[data-position="'+(position - 1)+'"]');
-	// 			// hone in on the first form element (this could be radio group, select, texarea or input)
-	// 			$shortlist = $shortlist.find('.form-element').first();
-	// 			// now we find the first actual form element
-	// 			var $item = $shortlist.find(':input').first() ;
-	// 			var tabindex = $item.attr('tabIndex');
-	// 			return tabindex;
-	// 		}
-	// 		$target.trigger('form:moveBackward',[position, tabIndex()]);
-	// 	});
+			// find first element in this section and subtract one from tabindex
+			var tabIndex = function(){
+				// get the previous form section by subtracting from current position
+				var $shortlist = $(target).find('.multipart-section[data-position="'+(position - 1)+'"]');
+				// hone in on the first form element (this could be radio group, select, texarea or input)
+				$shortlist = $shortlist.find('.form-element').first();
+				// now we find the first actual form element
+				var $item = $shortlist.find(':input').first() ;
+				var tabindex = $item.attr('tabIndex');
+				return tabindex;
+			}
+			$target.trigger('form:moveBackward',[position, tabIndex()]);
+		});
 
-	// 	// only show first section of form
-	// 	if( $formSection.data('position') != 3){
-	// 		// $formSection.hide()
-	// 		$formSection.css({
-	// 			left: width+'px'
-	// 		})
-	// 	} else {
-	// 		$formSection.css({
-	// 			left: '0px'
-	// 		})
-	// 	}
-	// });
+		// only show first section of form
+		if( $formSection.data('position') != 3){
+			// $formSection.hide()
+			$formSection.css({
+				left: width+'px'
+			})
+		} else {
+			$formSection.css({
+				left: '0px'
+			})
+		}
+	});
 
 
 	// bind submit handlers to form
-	// $(form).on('submit', function(e){
-		// e.preventDefault();
+	$(form).on('submit', function(e){
+		e.preventDefault();
 
-		// console.log('blah')
-		// var $target = $(this).closest('.multipart-section');
-		// $target.trigger('form:submitForm');
-	// });
+		console.log('blah')
+		var $target = $(this).closest('.multipart-section');
+		$target.trigger('form:submitForm');
+	});
 
 	// form:moveForward
-	// $sections.on('form:moveForward', function(event, position, tabIndex){ 
-	// 	console.log('moving forward from: ', position, tabIndex)
-	// 	// move current/previous slide off left
-	// 	$(target).find('.multipart-section[data-position="'+position+'"]').css({
-	// 		left: -width+'px'
-	// 	});
-	// 	// move next slide to middle
-	// 	$(target).find('.multipart-section[data-position="'+(position + 1)+'"]').css({
-	// 		left: '0px'
-	// 	});	
-	// 	// focus on topmost form element /* breaks carousel overflow
-	// 	// $(target).find('.multipart-section[data-position="'+(position + 1)+'"]')
-	// 	// .find(':input[tabindex='+tabIndex+']').focus();
-	// });
-	// // form:moveBackward
-	// $sections.on('form:moveBackward', function(event, position, tabIndex){ 
-	// 	console.log('moving backward from: ', position, tabIndex)
-	// 	// change to previous form section
-	// 	// move this off left
-	// 	$(target).find('.multipart-section[data-position="'+position+'"]').css({
-	// 		left:width+'px'
-	// 	});
-	// 	$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').css({
-	// 		left:'0px'
+	$sections.on('form:moveForward', function(event, position, tabIndex){ 
+		console.log('moving forward from: ', position, tabIndex)
+		// move current/previous slide off left
+		$(target).find('.multipart-section[data-position="'+position+'"]').css({
+			left: -width+'px'
+		});
+		// move next slide to middle
+		$(target).find('.multipart-section[data-position="'+(position + 1)+'"]').css({
+			left: '0px'
+		});	
+		// focus on topmost form element /* breaks carousel overflow
+		// $(target).find('.multipart-section[data-position="'+(position + 1)+'"]')
+		// .find(':input[tabindex='+tabIndex+']').focus();
+	});
+	// form:moveBackward
+	$sections.on('form:moveBackward', function(event, position, tabIndex){ 
+		console.log('moving backward from: ', position, tabIndex)
+		// change to previous form section
+		// move this off left
+		$(target).find('.multipart-section[data-position="'+position+'"]').css({
+			left:width+'px'
+		});
+		$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').css({
+			left:'0px'
 
-	// 	});
+		});
 		
-	// 	// focus on topmost form element
-	// 	$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').show()
-	// 	.find(':input[tabindex='+tabIndex+']').focus();
-	// });
-	// // form:submitForm
-	// $form.on('form:submitForm', function(event){
-	// 	console.log('form submitting')
-	// 	// http://bin.geo/saved-form/?name=&email=&dob=&telephone=&comments=
-	// 	var data = $("form").serialize();
+		// focus on topmost form element
+		$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').show()
+		.find(':input[tabindex='+tabIndex+']').focus();
+	});
+	// form:submitForm
+	$form.on('form:submitForm', function(event){
+		console.log('form submitting')
+		// http://bin.geo/saved-form/?name=&email=&dob=&telephone=&comments=
+		var data = $("form").serialize();
 
-	// 	console.log(data, snwbDatacollectorAjaxUrl, snwbDatacollectorAjaxNonce)
+		console.log(data, snwbDatacollectorAjaxUrl, snwbDatacollectorAjaxNonce)
 		
-	// 	jQuery.ajax({
- //        	type: 'POST',
- //        	url: snwbDatacollectorAjaxUrl,
- //        	data: {
- //        		action: 'snwb_datacollector_save_form', 
- //        		security: snwbDatacollectorAjaxNonce,
- //        		data: data
- //        	},
- //        	success: function (a) {
- //            	console.log(a)
- //        	}
- //    	});
-	// }); 
+		jQuery.ajax({
+        	type: 'POST',
+        	url: snwbDatacollectorAjaxUrl,
+        	data: {
+        		action: 'snwb_datacollector_save_form', 
+        		security: snwbDatacollectorAjaxNonce,
+        		data: data
+        	},
+        	success: function (a) {
+            	console.log(a)
+        	}
+    	});
+	}); 
  		
 })(jQuery);
