@@ -185,7 +185,7 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 			$target.trigger('form:moveBackward',[position, tabIndex()]);
 		});
 		// only show first section of form
-		if( $formSection.data('position') != 3){
+		if( $formSection.data('position') != 1){
 			// $formSection.hide()
 			$formSection.css({
 				left: width+'px'
