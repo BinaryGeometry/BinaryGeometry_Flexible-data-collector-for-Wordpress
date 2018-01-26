@@ -23,7 +23,7 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
      * @param date (String) must be in format yyyy-mm-dd or use keyword: today
      * @returns {Date} returns false if invalid
      */
-    FormValidator.prototype.validateField = function(key) {
+    // FormValidator.prototype.validateField = function(key) {
     
 
     //       	// if (this.fields.hasOwnProperty(key)) {
@@ -56,15 +56,18 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
     //                 }
     //             }
     //         // }
-    	return;
-    }
+    	// return;
+    // }
 
 
 (function( $ ) {
- 	var target = '.snwb-multipart-form form .wrapper';
- 	// a useful object
- 	var list = [];
- 	var width = $(target).width();
+ 	var target = '.snwb-multipart-form form .wrapper',
+ 		$target = $(target),
+ 		section = '.multipart-section',
+ 		$sections = $target.find(section),
+ 		list = [],
+ 		width = $(target).width();
+ 	// a useful objective
 
 
 
@@ -96,14 +99,13 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 	// validator.validateField('name');
 
 
-	$(target).find('.multipart-section').each(function(){
-		var $formSection = $(this); // the current section
-		var position = $formSection.data('position'); // the position of the current section
+	$target.find('.multipart-section').each(function(){
+		var $formSection = $(this), // the current section
+			position = $formSection.data('position'); // the position of the current section
 
 		// save position
 		list.push({position:position, element: $(this)});
 
-		// var next = $formSection.find('.snwb-next') //  
 		// bind handlers to continue button
 		$formSection.find('.snwb-next').on('click', function(e){
 			e.preventDefault();
@@ -126,20 +128,38 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 				$shortlist = $shortlist.find('.form-element').first();
 				// now we find the first actual form element
 				var $item = $shortlist.find(':input').first() ;
-			var tabindex = $item.attr('tabIndex');
-			return tabindex;
-		}
+				var tabindex = $item.attr('tabIndex');
+				return tabindex;
+			}
 			$target.trigger('form:moveBackward',[position, tabIndex()]);
 		});
-		// bind submit handlers to form
-		$formSection.find('.snwb-submit').on('click', function(e){
+
+		// only show first section of form
+		if( $formSection.data('position') != 1){
+			// $formSection.hide()
+			$formSection.css({
+				left: width+'px'
+			})
+		} else {
+			$formSection.css({
+				left: '0px'
+			})
+		}
+		
+
+	});
+
+			// bind submit handlers to form
+		$target.find('#valid-form').on('submit', function(e){
 			e.preventDefault();
+
+			console.log('blah')
 			var $target = $(this).closest('.multipart-section');
 			$target.trigger('form:submitForm');
 		});
 
 		// form:moveForward
-		$formSection.on('form:moveForward', function(event, position, tabIndex){ 
+		$sections.on('form:moveForward', function(event, position, tabIndex){ 
 			console.log('moving forward from: ', position, tabIndex)
 			// move current/previous slide off left
 			$(target).find('.multipart-section[data-position="'+position+'"]').css({
@@ -152,11 +172,9 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 			// focus on topmost form element
 			// $(target).find('.multipart-section[data-position="'+(position + 1)+'"]')
 			// .find(':input[tabindex='+tabIndex+']').focus();
-
 		});
-
 		// form:moveBackward
-		$formSection.on('form:moveBackward', function(event, position, tabIndex){ 
+		$sections.on('form:moveBackward', function(event, position, tabIndex){ 
 			console.log('moving backward from: ', position, tabIndex)
 			// change to previous form section
 			// move this off left
@@ -172,40 +190,26 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 			$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').show()
 			.find(':input[tabindex='+tabIndex+']').focus();
 		});
-
 		// form:submitForm
-		$formSection.on('form:submitForm', function(event){
+		$target.on('form:submitForm', function(event){
 			console.log('form submitting')
 			var data = $("form").serialize();
+
 			console.log(data, snwbDatacollectorAjaxUrl, snwbDatacollectorAjaxNonce)
+			
 			jQuery.ajax({
-            type: 'POST',
-            url: snwbDatacollectorAjaxUrl,
-            data: {
-            	action: 'snwb_datacollector_save_form', 
-            	security: snwbDatacollectorAjaxNonce,
-            	data: data
-            },
-            success: function (a) {
-                console.log(a)
-            }
-        });
+            	type: 'POST',
+            	url: snwbDatacollectorAjaxUrl,
+            	data: {
+            		action: 'snwb_datacollector_save_form', 
+            		security: snwbDatacollectorAjaxNonce,
+            		data: data
+            	},
+            	success: function (a) {
+                	console.log(a)
+            	}
+        	});
 		}); 
-
-		// only show first section of form
-		if( $formSection.data('position') != 1){
-			// $formSection.hide()
-			$formSection.css({
-				left: width+'px'
-			})
-		} else {
-			$formSection.css({
-				left: '0px'
-			})
-		}
-		
-
-	})
 	/* Doing job good job */
 	// $('.dob-datepicker').Zebra_DatePicker();
 
