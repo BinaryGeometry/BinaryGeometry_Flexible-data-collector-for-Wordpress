@@ -61,7 +61,7 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 
 
 (function( $ ) {
-
+	/*
 	var validator = new FormValidator('snwb_dataCollector_validate_this', [
 		{
 		    name: 'name',
@@ -137,6 +137,8 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 	});
 
 	// validator.validateField('name');
+ 	*/
+
  	var target = '.snwb-multipart-form form .wrapper',
  		$target = $(target),
  		section = '.multipart-section',
@@ -182,7 +184,6 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 			}
 			$target.trigger('form:moveBackward',[position, tabIndex()]);
 		});
-
 		// only show first section of form
 		if( $formSection.data('position') != 3){
 			// $formSection.hide()
@@ -198,12 +199,20 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 
 
 	// bind submit handlers to form
-	$(form).on('submit', function(e){
+	// $('.snwb-submit').on('click', function(e){
+	$('#valid-form').on('submit', function(e){
+		
 		e.preventDefault();
 
-		console.log('blah')
-		var $target = $(this).closest('.multipart-section');
-		$target.trigger('form:submitForm');
+		console.log('blah');
+
+		sayThanks();
+
+		// var $target = $(this).closest('.multipart-section');
+		$form.trigger('form:submitForm');
+		// var e = $target.trigger('form:submitForm');
+		// $target.trigger('form:formThanks', [e]);
+		$form.trigger('form:sayThanks');
 	});
 
 	// form:moveForward
@@ -256,8 +265,35 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
         	},
         	success: function (a) {
             	console.log(a)
+            	return a;
         	}
     	});
 	}); 
+	// form:sayThanks
+	$form.on('form:sayThanks', function(event){
+		console.log('thanks');
+		var box = '.thank-you-box',
+			inbox = '.thank-you-box-inner';
+
+		$(box).show();
+	})
+	function sayThanks(){
+		console.log('thanks');
+		var box = '.thank-you-box',
+			inbox = '.thank-you-box-inner';
+
+		$(section).fadeOut(400, function(){
+
+			$(box).show(10, function(){
+				
+			
+				$(inbox).css({
+					'opacity':1,
+					'transform':'scale(1)',
+					'-webkit-transform':'scale(1)'
+				})	
+			});
+		});
+	}
  		
 })(jQuery);
