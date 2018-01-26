@@ -61,16 +61,6 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 
 
 (function( $ ) {
- 	var target = '.snwb-multipart-form form .wrapper',
- 		$target = $(target),
- 		section = '.multipart-section',
- 		$sections = $target.find(section),
- 		list = [],
- 		width = $(target).width();
- 	// a useful objective
-
-
-
 	// var validator = new FormValidator('snwb_dataCollector_validate_this', [
 	// {
 	//     name: 'name',
@@ -98,8 +88,18 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 
 	// validator.validateField('name');
 
+ 	var target = '.snwb-multipart-form form .wrapper',
+ 		$target = $(target),
+ 		section = '.multipart-section',
+ 		$sections = $target.find(section),
+ 		form = '#valid-form',
+ 		$form = $target.find(form),
+ 		list = [],
+ 		width = $(target).width();
+ 	// a useful objective
 
 	$target.find('.multipart-section').each(function(){
+		
 		var $formSection = $(this), // the current section
 			position = $formSection.data('position'); // the position of the current section
 
@@ -135,7 +135,7 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 		});
 
 		// only show first section of form
-		if( $formSection.data('position') != 1){
+		if( $formSection.data('position') != 3){
 			// $formSection.hide()
 			$formSection.css({
 				left: width+'px'
@@ -149,71 +149,69 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 
 	});
 
-			// bind submit handlers to form
-		$target.find('#valid-form').on('submit', function(e){
-			e.preventDefault();
-
-			console.log('blah')
-			var $target = $(this).closest('.multipart-section');
-			$target.trigger('form:submitForm');
-		});
-
-		// form:moveForward
-		$sections.on('form:moveForward', function(event, position, tabIndex){ 
-			console.log('moving forward from: ', position, tabIndex)
-			// move current/previous slide off left
-			$(target).find('.multipart-section[data-position="'+position+'"]').css({
-				left: -width+'px'
-			});
-			// move next slide to middle
-			$(target).find('.multipart-section[data-position="'+(position + 1)+'"]').css({
-				left: '0px'
-			});	
-			// focus on topmost form element
-			// $(target).find('.multipart-section[data-position="'+(position + 1)+'"]')
-			// .find(':input[tabindex='+tabIndex+']').focus();
-		});
-		// form:moveBackward
-		$sections.on('form:moveBackward', function(event, position, tabIndex){ 
-			console.log('moving backward from: ', position, tabIndex)
-			// change to previous form section
-			// move this off left
-			$(target).find('.multipart-section[data-position="'+position+'"]').css({
-				left:width+'px'
-			});
-			$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').css({
-				left:'0px'
-
-			});
-			
-			// focus on topmost form element
-			$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').show()
-			.find(':input[tabindex='+tabIndex+']').focus();
-		});
-		// form:submitForm
-		$target.on('form:submitForm', function(event){
-			console.log('form submitting')
-			var data = $("form").serialize();
-
-			console.log(data, snwbDatacollectorAjaxUrl, snwbDatacollectorAjaxNonce)
-			
-			jQuery.ajax({
-            	type: 'POST',
-            	url: snwbDatacollectorAjaxUrl,
-            	data: {
-            		action: 'snwb_datacollector_save_form', 
-            		security: snwbDatacollectorAjaxNonce,
-            		data: data
-            	},
-            	success: function (a) {
-                	console.log(a)
-            	}
-        	});
-		}); 
-	/* Doing job good job */
 	// $('.dob-datepicker').Zebra_DatePicker();
 
+	// bind submit handlers to form
+	$(form).on('submit', function(e){
+		// e.preventDefault();
 
+		console.log('blah')
+		// var $target = $(this).closest('.multipart-section');
+		// $target.trigger('form:submitForm');
+	});
+
+	// form:moveForward
+	$sections.on('form:moveForward', function(event, position, tabIndex){ 
+		console.log('moving forward from: ', position, tabIndex)
+		// move current/previous slide off left
+		$(target).find('.multipart-section[data-position="'+position+'"]').css({
+			left: -width+'px'
+		});
+		// move next slide to middle
+		$(target).find('.multipart-section[data-position="'+(position + 1)+'"]').css({
+			left: '0px'
+		});	
+		// focus on topmost form element /* breaks carousel overflow
+		// $(target).find('.multipart-section[data-position="'+(position + 1)+'"]')
+		// .find(':input[tabindex='+tabIndex+']').focus();
+	});
+	// form:moveBackward
+	$sections.on('form:moveBackward', function(event, position, tabIndex){ 
+		console.log('moving backward from: ', position, tabIndex)
+		// change to previous form section
+		// move this off left
+		$(target).find('.multipart-section[data-position="'+position+'"]').css({
+			left:width+'px'
+		});
+		$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').css({
+			left:'0px'
+
+		});
+		
+		// focus on topmost form element
+		$(target).find('.multipart-section[data-position="'+(position - 1)+'"]').show()
+		.find(':input[tabindex='+tabIndex+']').focus();
+	});
+	// form:submitForm
+	$form.on('form:submitForm', function(event){
+		console.log('form submitting')
+		// http://bin.geo/saved-form/?name=&email=&dob=&telephone=&comments=
+		var data = $("form").serialize();
+
+		console.log(data, snwbDatacollectorAjaxUrl, snwbDatacollectorAjaxNonce)
+		
+		jQuery.ajax({
+        	type: 'POST',
+        	url: snwbDatacollectorAjaxUrl,
+        	data: {
+        		action: 'snwb_datacollector_save_form', 
+        		security: snwbDatacollectorAjaxNonce,
+        		data: data
+        	},
+        	success: function (a) {
+            	console.log(a)
+        	}
+    	});
+	}); 
  		
- 	// console.log(list);
 })(jQuery);
