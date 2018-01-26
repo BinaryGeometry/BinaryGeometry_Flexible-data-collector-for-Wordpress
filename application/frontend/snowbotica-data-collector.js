@@ -205,14 +205,14 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 		e.preventDefault();
 
 		console.log('blah');
-
-		sayThanks();
+		var p = submitForm();
+		console.log('return p', p)
+		// sayThanks();
 
 		// var $target = $(this).closest('.multipart-section');
-		$form.trigger('form:submitForm');
+		// $form.trigger('form:submitForm');
 		// var e = $target.trigger('form:submitForm');
-		// $target.trigger('form:formThanks', [e]);
-		$form.trigger('form:sayThanks');
+		// $form.trigger('form:sayThanks');
 	});
 
 	// form:moveForward
@@ -248,13 +248,14 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 		.find(':input[tabindex='+tabIndex+']').focus();
 	});
 	// form:submitForm
-	$form.on('form:submitForm', function(event){
+	// $form.on('form:submitForm', function(event){
+	function submitForm(){
 		console.log('form submitting')
 		// http://bin.geo/saved-form/?name=&email=&dob=&telephone=&comments=
 		var data = $("form").serialize();
 
 		console.log(data, snwbDatacollectorAjaxUrl, snwbDatacollectorAjaxNonce)
-		
+		var d;
 		jQuery.ajax({
         	type: 'POST',
         	url: snwbDatacollectorAjaxUrl,
@@ -264,34 +265,45 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
         		data: data
         	},
         	success: function (a) {
-            	console.log(a)
-            	return a;
+            	console.log('returned data', a)
+		// $form.trigger('form:formThanks', [a]);
+sayThanks(a);
+            	// d = a;
         	}
     	});
-	}); 
+    	// no promises
+    	return d;
+	}; 
+	// }); 
 	// form:sayThanks
-	$form.on('form:sayThanks', function(event){
-		console.log('thanks');
-		var box = '.thank-you-box',
-			inbox = '.thank-you-box-inner';
+	// $form.on('form:sayThanks', function(event){
+	// 	console.log('thanks');
+	// 	var box = '.thank-you-box',
+	// 		inbox = '.thank-you-box-inner';
 
-		$(box).show();
-	})
-	function sayThanks(){
-		console.log('thanks');
+	// 	$(box).show();
+	// })
+	function sayThanks(message){
+		console.log('thanks', message);
 		var box = '.thank-you-box',
 			inbox = '.thank-you-box-inner';
 
 		$(section).fadeOut(400, function(){
 
 			$(box).show(10, function(){
-				
 			
-				$(inbox).css({
+				var p = $(inbox).find('h1').val();
+				console.log('text here', p)
+				p = p + ' ' + message;
+				// .append(message)
+				
+				$(inbox)
+				.css({
 					'opacity':1,
 					'transform':'scale(1)',
 					'-webkit-transform':'scale(1)'
 				})	
+				$(inbox).html(message);
 			});
 		});
 	}

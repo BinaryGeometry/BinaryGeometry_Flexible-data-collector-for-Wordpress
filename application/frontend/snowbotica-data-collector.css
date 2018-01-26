@@ -69,20 +69,17 @@
     padding: 5px 10px;
     border:1px solid #a3c2d8;
     color:#443d46;
-    /*text-transform: uppercase;*/
 }
 .snwb-next {
     font-weight:bold;
-	float: 	right;	
+	float:right;	
 }
 .snwb-back {
-	float: 	left;	
-
+	float:left;	
 }
 .snwb-submit {
     font-weight:bold;
-	float: 	right;	
-
+	float:right;	
 }
 
 .thank-you-box {
@@ -106,7 +103,7 @@
 	/*transition: opacity 2s ease-in;*/
 	padding:20px;
 	height: 100%;
-	background:orange;
+	background:white;
 	display: flex;
   	align-items: center;
   	justify-content: center;
@@ -115,7 +112,7 @@
   	opacity:0.4;
 }
 .thank-you-box-inner h1 {
-	color:darkblue;
+	/*color:darkblue;*/
 	text-transform: uppercase;
 	text-align: center;
 	font-size: 26px;
