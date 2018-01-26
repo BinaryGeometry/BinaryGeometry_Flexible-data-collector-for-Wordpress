@@ -100,35 +100,39 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 	    }
 	});
 
-validator.registerCallback('double_barrel', function(value) {
-	var value = value,
-		valid = /\s/,
-		k = valid.test(value);
-    
-    if (k) {
-        return true;
-    }
-    return false;
-}).setMessage('double_barrel', "Please use both names");
+	validator.registerCallback('double_barrel', function(value) {
+		var value = value,
+			valid = /\s/,
+			k = valid.test(value);
+	    
+	    if (k) {
+	        return true;
+	    }
+	    return false;
+	}).setMessage('double_barrel', "Please use both names");
 
-validator.registerCallback('date', function(value) {
-    var value = value,
-    	// valid = /^\d{2}([./-])\d{2}\1\d{4}$/, /* doesn't match date
-    	valid = value,
-    	k = valid.test(valid)
-    if (k) {
-    	return true;
-    }
-    return false;
-}).setMessage('date', "Please use a valid date");
+	validator.registerCallback('date', function(value) {
+	    var value = value,
+	    	// valid = /^\d{2}([./-])\d{2}\1\d{4}$/, /* doesn't match date
+	    	valid = value,
+	    	k = valid.test(valid)
+	    if (k) {
+	    	return true;
+	    }
+	    return false;
+	}).setMessage('date', "Please use a valid date");
 
-// validator.registerCallback('snwb_comments', function(value) {
-    // if (value !== '') {
-	   // 	return true;
-    // }
+	// validator.registerCallback('snwb_comments', function(value) {
+	    // if (value !== '') {
+		   // 	return true;
+	    // }
 
-//     return false;
-// }).setMessage('snwb_comments', "Please say something");
+	//     return false;
+	// }).setMessage('snwb_comments', "Please say something");
+
+	$('.dob-datepicker').Zebra_DatePicker({
+		format: 'm-d-Y'
+	});
 
 	// validator.validateField('name');
  	var target = '.snwb-multipart-form form .wrapper',
@@ -190,9 +194,6 @@ validator.registerCallback('date', function(value) {
 	// 	}
 	// });
 
-	$('.dob-datepicker').Zebra_DatePicker({
-		format: 'm-d-Y'
-	});
 
 	// bind submit handlers to form
 	// $(form).on('submit', function(e){
