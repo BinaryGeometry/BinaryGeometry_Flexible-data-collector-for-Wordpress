@@ -280,7 +280,6 @@
             rules = field.rules.split('|'),
             indexOfRequired = field.rules.indexOf('required'),
             isEmpty = (!field.value || field.value === '' || field.value === undefined);
-// console.log('validating', this.errors)
         /*
          * Run through the rules and execute the validation methods as needed
          */
@@ -376,7 +375,6 @@
     FormValidator.prototype.validateOne = function(key) {
         var field = this.fields[key] || {},
             element = this.form[field.name];
-            console.log('i got the ', key)
         // resets errors
         this.errors = [];
         if (element && element !== undefined) {
@@ -385,9 +383,6 @@
             field.type = (element.length > 0) ? element[0].type : element.type;
             field.value = attributeValue(element, 'value');
             field.checked = attributeValue(element, 'checked');
-
-            console.log('inside if', this.message)
-            console.log(field, element)
 
             /*
              * Run through the rules for each field.
@@ -398,18 +393,28 @@
             if (field.depends && typeof field.depends === "function") {
                 if (field.depends.call(this, field)) {
                     console.log('inside function', this._validateField(field) );
-        // console.log('errors after', this.errors)
-        // console.log('errors after', this.errors)
+
                 }
             } else if (field.depends && typeof field.depends === "string" && this.conditionals[field.depends]) {
                 if (this.conditionals[field.depends].call(this,field)) {
                     this._validateField(field);
                     console.log('inside next function', this._validateField(field) );
+                
                 }
             } else {
+
                 this._validateField(field);
-                return this.errors;
-                console.log('errors after', this.errors)
+                
+                if (this.errors.length > 0){
+                    console.log('eerrs', this.errors)
+
+                    return this.errors;
+                } else {
+                    
+                    console.log('no ers')
+
+                    return true;
+                }
             }
         }
         return true;
