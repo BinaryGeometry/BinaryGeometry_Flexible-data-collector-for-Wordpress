@@ -150,19 +150,28 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 		console.log(field)
 		var $field = $('[name="'+field+'"]'),
 		    $errBox = $field.siblings('.displaying-errors');
-		
+		this.state = 'libertentia'
 		$field.on('blur', function(e){
 			var valid = validator.validateOne(field),
 			message
 			
-			if(typeof valid === 'object' && valid.length === 0){
+			if(valid === true){
+			// if(typeof valid === 'object' && valid.length === 0){
 				$errBox.removeClass('true').hide(100)
 				// console.log('field is okay', valid)
+				this.state = 'valid';
+				console.log(this.state)
 			} else {
 				message = snwbErrorString(valid);
 				$errBox.html(message).show(100).addClass('true');
+				this.state = 'invalid';
+				console.log(this.state)
 			} 
 		});
+		return {
+			state: this.state
+		}
+	
 	}
 	function snwbErrorString(eros){
 		var html = '';
@@ -173,10 +182,14 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 			html += '</p>';
 		}
 		console.log(html)
+		console.log('comstate', com.state)
+		console.log('telstate', tel.state)
 		return html;
 	}
-	snwbValid('comments');
-	snwbValid('telephone');
+	// snwbValid('comments');
+	var com = new snwbValid('comments');
+	// snwbValid('telephone');
+	var tel = new snwbValid('telephone');
 
 
 
