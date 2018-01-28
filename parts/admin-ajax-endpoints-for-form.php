@@ -17,14 +17,18 @@ function snwb_datacollector_save_form(){
   parse_str($rawData, $output);
 
   // save the post data to array
+  if(!is_email($output['email'])){
+    echo 'email address fail';
+  } 
+  
   // VALIDATION GOES HERE
   $postInfo = array(
-    'name'   => $output['name'],
-    'email'   => $output['email'],
-    'gender' => $output['gender'], 
-    'dob'    => $output['dob'], 
-    'telephone' => $output['telephone'], 
-    'comments'  => $output['comments'],
+    'name'      => sanitize_text_field($output['name']),
+    'email'     => sanitize_email($output['email']),
+    'gender'    => sanitize_text_field($output['gender']), 
+    'dob'       => sanitize_textarea_field($output['dob']), 
+    'telephone' => sanitize_text_field($output['telephone']), 
+    'comments'  => sanitize_textarea_field($output['comments']),
   );
   // IF VALID
 
@@ -56,7 +60,11 @@ function snwb_datacollector_save_form(){
   // zoom big and fade form page
   // zoom normal from small and fade in other page
 
-  echo "Thank you - you are number $post_id. Someone will be in touch shortly";
+  $domain = get_site_url();
+  $url = $domain.'/'.SNwB_DATACOLLECTOR_SLUG.'/'.$post_id;
+  $link = "<a href='$url'>Go to data</a>";
+  echo $link;
+  // echo "Thank you - you are number $post_id. Someone will be in touch shortly";
     // Insert the post into the database and get the resulting id back... 
      // __update_post_meta( $the_post_id, 'my-custom-field', 'my_custom_field_value' );
   

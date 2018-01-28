@@ -16,11 +16,14 @@ if ( ! function_exists( 'snowbotica_data_collector_frontend_assets' ) ) {
         wp_enqueue_style( 'snowbotica-data-collector-css', SNwB_DATACOLLECTOR_URL .  'application/frontend/snowbotica-data-collector.css', false, '', 'all');
         
         // wp_enqueue_style( 'snowbotica-data-collector-css', SNwB_DATACOLLECTOR_URL .  'application/dependencies/Zebra_Datepicker-master/dist/css/bootstrap/zebra_datepicker.min.css', false, '', 'all');
+        
         wp_enqueue_style( 'zebra_datepicker_css', SNwB_DATACOLLECTOR_URL .  'application/dependencies/Zebra_Datepicker-master/dist/css/bootstrap/zebra_datepicker.min.css', false, '', 'all');
 
         wp_enqueue_script( 'zebra_datepicker', SNwB_DATACOLLECTOR_URL .  'application/dependencies/Zebra_Datepicker-master/dist/zebra_datepicker.min.js', array('jquery'), '', true); 
     
-        wp_enqueue_script( 'snowbotica-data-collector_js', SNwB_DATACOLLECTOR_URL .  'application/frontend/snowbotica-data-collector.js', array('jquery', 'zebra_datepicker'), '', true); 
+        wp_enqueue_script( 'validate_js', SNwB_DATACOLLECTOR_URL .  'application/dependencies/validate.js', array('jquery'), '', true); 
+        
+        wp_enqueue_script( 'snowbotica-data-collector_js', SNwB_DATACOLLECTOR_URL .  'application/frontend/snowbotica-data-collector.js', array('jquery', 'zebra_datepicker', 'validate_js'), '', true); 
 
         wp_localize_script( 'snowbotica-data-collector_js', 'snwb_datacollector_api_object', array( 
           'ajax_nonce' => wp_create_nonce('snowbotica-data-collector'),

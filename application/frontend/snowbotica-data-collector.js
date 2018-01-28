@@ -23,50 +23,53 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
      * @param date (String) must be in format yyyy-mm-dd or use keyword: today
      * @returns {Date} returns false if invalid
      */
-    // FormValidator.prototype.validateField = function(key) {
-    
 
-    //       	// if (this.fields.hasOwnProperty(key)) {
-    //             var field = this.fields[key] || {},
-    //                 element = this.form[field.name];
+    // FormValidator.prototype._validateOne = function(key) {
+        // this.errors = [];
+// console.log(key)
+        // for (var key in this.fields) {
+            // if (this.fields.hasOwnProperty(key)) {
+		          //       var field = this.fields[key] || {},
+		          //           element = this.form[field.name];
 
-    //             if (element && element !== undefined) {
-    //                 field.id = attributeValue(element, 'id');
-    //                 field.element = element;
-    //                 field.type = (element.length > 0) ? element[0].type : element.type;
-    //                 field.value = attributeValue(element, 'value');
-    //                 field.checked = attributeValue(element, 'checked');
+		          //       if (element && element !== undefined) {
+		          //           field.id = attributeValue(element, 'id');
+		          //           field.element = element;
+		          //           field.type = (element.length > 0) ? element[0].type : element.type;
+		          //           field.value = attributeValue(element, 'value');
+		          //           field.checked = attributeValue(element, 'checked');
 
-                    
-    //                  * Run through the rules for each field.
-    //                  * If the field has a depends conditional, only validate the field
-    //                  * if it passes the custom function
-                     
+		                    
+		          //            * Run through the rules for each field.
+		          //            * If the field has a depends conditional, only validate the field
+		          //            * if it passes the custom function
+		                     
 
-    //                 if (field.depends && typeof field.depends === "function") {
-    //                     if (field.depends.call(this, field)) {
-    //                         this._validateField(field);
-    //                     }
-    //                 } else if (field.depends && typeof field.depends === "string" && this.conditionals[field.depends]) {
-    //                     if (this.conditionals[field.depends].call(this,field)) {
-    //                         this._validateField(field);
-    //                     }
-    //                 } else {
-    //                     this._validateField(field);
-    //                 }
-    //             }
-    //         // }
-    	// return;
+		          //           if (field.depends && typeof field.depends === "function") {
+		          //               if (field.depends.call(this, field)) {
+		          //                   this._validateField(field);
+		          //               }
+		          //           } else if (field.depends && typeof field.depends === "string" && this.conditionals[field.depends]) {
+		          //               if (this.conditionals[field.depends].call(this,field)) {
+		          //                   this._validateField(field);
+		          //               }
+		          //           } else {
+		          //               this._validateField(field);
+		          //           }
+		          //       }
+            // // }
+        // }
     // }
 
 
 (function( $ ) {
-	/*
+	
 	var validator = new FormValidator('snwb_dataCollector_validate_this', [
 		{
 		    name: 'name',
 		    display: 'Name',
-		    rules: 'required|callback_double_barrel'
+		    rules: 'required|callback_double_barrel',
+		    onBlur: true
 		},
 		{
 	    	name: 'email',
@@ -83,11 +86,11 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 	    	display: 'Date of Birth',
 	    	rules: 'required|callback_date'
 		},
-		{
-	    	name: 'telephone',
-	    	display: 'Telephone number',
-	    	rules: 'required|numeric'
-		},
+		// {
+	 //    	name: 'telephone',
+	 //    	display: 'Telephone number',
+	 //    	rules: 'required|numeric'
+		// },
 		{
 	    	name: 'comments',
 	    	display: 'Comments',
@@ -100,29 +103,33 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 	    }
 	});
 
-	console.log(validator)
+	// console.log(validator)
 
-	validator.registerCallback('double_barrel', function(value) {
-		var value = value,
-			valid = /\s/,
-			k = valid.test(value);
+
+		// validator._validateOne('comments')
+
+
+	// validator.registerCallback('double_barrel', function(value) {
+	// 	var value = value,
+	// 		valid = /\s/,
+	// 		k = valid.test(value);
 	    
-	    if (k) {
-	        return true;
-	    }
-	    return false;
-	}).setMessage('double_barrel', "Please use both names");
+	//     if (k) {
+	//         return true;
+	//     }
+	//     return false;
+	// }).setMessage('double_barrel', "Please use both names");
 
-	validator.registerCallback('date', function(value) {
-	    var value = value,
-	    	// valid = /^\d{2}([./-])\d{2}\1\d{4}$/, /* doesn't match date
-	    	valid = value,
-	    	k = valid.test(valid)
-	    if (k) {
-	    	return true;
-	    }
-	    return false;
-	}).setMessage('date', "Please use a valid date");
+	// validator.registerCallback('date', function(value) {
+	//     var value = value,
+	//     	// valid = /^\d{2}([./-])\d{2}\1\d{4}$/, /* doesn't match date
+	//     	valid = value,
+	//     	k = valid.test(valid)
+	//     if (k) {
+	//     	return true;
+	//     }
+	//     return false;
+	// }).setMessage('date', "Please use a valid date");
 
 	// validator.registerCallback('snwb_comments', function(value) {
 	    // if (value !== '') {
@@ -132,12 +139,31 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 	//     return false;
 	// }).setMessage('snwb_comments', "Please say something");
 
+
+ 	
 	$('.dob-datepicker').Zebra_DatePicker({
 		format: 'm-d-Y'
 	});
 
-	// validator.validateField('name');
- 	*/
+	var snwbValid = function(field){
+		// console.log('valid', field)
+		var $field = $('[name="'+field+'"]'),
+		    $errBox = $field.siblings('.displaying-errors');
+		// console.log($field.length)
+		$field.on('blur', function(e, field){
+			// validator.validateOne('comments')
+			// if(validator.validateOne(field)){
+				// $errBox.removeClass('true')
+			// } else {
+				$errBox.addClass('true');
+			// }
+		});
+	}
+	snwbValid('comments');
+	snwbValid('telephone');
+
+	// validator.validateOne('comments')
+
 
  	var target = '.snwb-multipart-form form .wrapper',
  		$target = $(target),
@@ -198,21 +224,18 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 	});
 
 
-	// bind submit handlers to form
-	// $('.snwb-submit').on('click', function(e){
 	$('#valid-form').on('submit', function(e){
 		
 		e.preventDefault();
 
-		console.log('blah');
-		var p = submitForm();
-		console.log('return p', p)
-		// sayThanks();
+		console.log('blah')
 
-		// var $target = $(this).closest('.multipart-section');
-		// $form.trigger('form:submitForm');
-		// var e = $target.trigger('form:submitForm');
-		// $form.trigger('form:sayThanks');
+	// 	var p = submitForm();
+	// 	console.log('return p', p)
+
+	// 	// $form.trigger('form:submitForm');
+	// 	// var e = $target.trigger('form:submitForm');
+	// 	// $form.trigger('form:sayThanks');
 	});
 
 	// form:moveForward
@@ -255,7 +278,6 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 		var data = $("form").serialize();
 
 		console.log(data, snwbDatacollectorAjaxUrl, snwbDatacollectorAjaxNonce)
-		var d;
 		jQuery.ajax({
         	type: 'POST',
         	url: snwbDatacollectorAjaxUrl,
@@ -264,25 +286,12 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
         		security: snwbDatacollectorAjaxNonce,
         		data: data
         	},
-        	success: function (a) {
-            	console.log('returned data', a)
-		// $form.trigger('form:formThanks', [a]);
-sayThanks(a);
-            	// d = a;
+        	success: function (posturl) {
+				sayThanks(posturl);
         	}
     	});
-    	// no promises
     	return d;
 	}; 
-	// }); 
-	// form:sayThanks
-	// $form.on('form:sayThanks', function(event){
-	// 	console.log('thanks');
-	// 	var box = '.thank-you-box',
-	// 		inbox = '.thank-you-box-inner';
-
-	// 	$(box).show();
-	// })
 	function sayThanks(message){
 		console.log('thanks', message);
 		var box = '.thank-you-box',
@@ -309,3 +318,4 @@ sayThanks(a);
 	}
  		
 })(jQuery);
+// http://blog.formkeep.com/5-creative-ways-to-use-forms-to-improve-your-ux/

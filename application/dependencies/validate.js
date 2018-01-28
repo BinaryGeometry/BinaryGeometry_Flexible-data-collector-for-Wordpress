@@ -280,7 +280,7 @@
             rules = field.rules.split('|'),
             indexOfRequired = field.rules.indexOf('required'),
             isEmpty = (!field.value || field.value === '' || field.value === undefined);
-
+console.log('validating', this.errors)
         /*
          * Run through the rules and execute the validation methods as needed
          */
@@ -369,7 +369,56 @@
                 if (!existingError) this.errors.push(errorObject);
             }
         }
+            
     };
+
+
+    FormValidator.prototype.validateOne = function(key) {
+        var field = this.fields[key] || {},
+            element = this.form[field.name];
+console.log(field, element)
+        if (element && element !== undefined) {
+            field.id = attributeValue(element, 'id');
+            field.element = element;
+            field.type = (element.length > 0) ? element[0].type : element.type;
+            field.value = attributeValue(element, 'value');
+            field.checked = attributeValue(element, 'checked');
+
+            console.log('inside if')
+
+            /*
+             * Run through the rules for each field.
+             * If the field has a depends conditional, only validate the field
+             * if it passes the custom function
+             */
+
+            if (field.depends && typeof field.depends === "function") {
+                if (field.depends.call(this, field)) {
+                    console.log('inside function', this._validateField(field) );
+                }
+            } else if (field.depends && typeof field.depends === "string" && this.conditionals[field.depends]) {
+                if (this.conditionals[field.depends].call(this,field)) {
+                    this._validateField(field);
+                    console.log('inside next function', this._validateField(field) );
+                }
+            } else {
+                console.log('s')
+                this._validateField(field);
+                    console.log('inside final function', this._validateField(field) );
+            }
+        }
+        if (this.errors.length > 0 ) {
+            console.log('falytrue', this.errors['field'])
+            return true;
+        } 
+        console.log('true')
+
+        // if (typeof this.callback === 'function') {
+            // this.callback(this.errors, evt);
+        // }
+
+        return true;
+    }
 
     /**
      * private function _getValidDate: helper function to convert a string date to a Date object

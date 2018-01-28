@@ -1,6 +1,12 @@
 
+.snwb-data-collector {
+	background: #393948;
+	padding:40px 0;
+}
+
 .snwb-multipart-form  {
 	width: 100%;
+	background: white;
 }
 .snwb-multipart-form form  {
 	width: 100%;
@@ -8,13 +14,15 @@
 	/*background:orange;*/
 }
 .snwb-multipart-form form .wrapper  {
-	overflow: hidden;
-	width: 100%;
-	/*background:pink;*/
-	border:1px solid #a3c2d8;
-	height:400px;
-	float: left;
-	position: relative;
+    overflow: hidden;
+    overflow-y:scroll;
+    width: 100%;
+    background: white;
+    border: 3px solid #a3c2d8;
+    height: 600px;
+    float: left;
+    position: relative;
+    border-radius: 2px;
 }
 .snwb-multipart-form form .wrapper .multipart-section {
 	padding:20px;
@@ -46,22 +54,83 @@
 
 .snwb-multipart-form form .wrapper .multipart-section .form-element label {
 	/*background:blue;*/
+	font-size: 18px;
+	font-weight: 100;
+	color: #393948;
+	margin-bottom: 15px;
 }
 .snwb-multipart-form form .wrapper .multipart-section .form-element input[type="text"],
 .snwb-multipart-form form .wrapper .multipart-section .form-element input[type="number"],
 .snwb-multipart-form form .wrapper .multipart-section .form-element input[type="email"],
 .snwb-multipart-form form .wrapper .multipart-section .form-element input[type="password"] {
+    border-radius: 0 5px 10px 11px;
+	border-left: 2px solid #a3c2d8;
+	border-radius: 0 5px 10px 11px;
+    border-left: 2px solid #a3c2d8;
+    font-size: 18px;
+    color: blakc;
+    padding-top: 10px;
+    height: inherit;
+    font-weight: 100;
+    padding-bottom: 10px;
+    color: #393948;
+}
+
+.snwb-multipart-form form .wrapper .multipart-section .form-element input[type="text"]:focus,
+.snwb-multipart-form form .wrapper .multipart-section .form-element input[type="number"]:focus,
+.snwb-multipart-form form .wrapper .multipart-section .form-element input[type="email"]:focus,
+.snwb-multipart-form form .wrapper .multipart-section .form-element input[type="password"]:focus {
+	border-left: 7px solid #a3c2d8;
+	transition: border .3s ease-out;
 }
 .snwb-multipart-form form .wrapper .multipart-section .form-element textarea {
+	transition: border .2s ease-out;
+    border-radius: 0 5px 10px 11px;
+	border-left: 2px solid #a3c2d8;
 	display: block;
 	width: 100%;
 	height:100px;
 }
+.snwb-multipart-form form .wrapper .multipart-section .form-element textarea:focus {
+	border-left: 7px solid #a3c2d8;
+}
 .snwb-multipart-form form .wrapper .multipart-section .form-element input[type="radio"] {
 }	
 .snwb-multipart-form form .wrapper .multipart-section .form-element label.radio-label {	
+	/*border-left: 7px solid #a3c2d8;*/
 }
 
+.displaying-errors {
+	    float: left;
+    width: 100%;
+    border: 1px dotted #c13131;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-top:-10px;
+    margin-bottom:10px;
+    transition: opacity .3s linear;
+    -webkit-transition: opacity .3s linear;
+	opacity:0;
+}
+.displaying-errors p {
+	padding: 0;
+	margin: 0;
+	font-size: 16px;
+	color:#c13131;
+	font-weight: 	500;
+}
+.displaying-errors.true {
+	opacity:1;
+}
+.displaying-errors.false {
+
+}
+
+.form-controls {
+	width:100%;
+	float: 	left;
+	margin-top:20px;
+}
 .snwb-next,
 .snwb-submit,
 .snwb-back {
@@ -117,3 +186,18 @@
 	text-align: center;
 	font-size: 26px;
 }
+
+
+
+.title-bar {
+    background: #112110;
+    padding: 0 .3rem .1rem .8rem;
+    border-bottom: 1px solid #112110;
+}
+
+.title-bar {
+    background: white !important;
+    padding: 0 .3rem .1rem .8rem;
+    border-bottom: 1px solid white !important;
+}
+
