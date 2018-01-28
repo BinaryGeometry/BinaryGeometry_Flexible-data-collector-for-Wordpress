@@ -40,11 +40,13 @@ get_header(); ?>
 									<span class="displaying-errors">
 									</span>
 								</div>
-								<a href="" class="snwb-next" tabindex=3>Continue</a>
+								<div class="form-controls">
+									<a href="" class="snwb-next" tabindex=3>Continue</a>
+								</div>
 							</article>
-						<!-- </div> -->
-						<!-- <div class="multipart-section" data-position="2"> -->
-							<!-- <article>
+						</div>
+						<div class="multipart-section" data-position="2">
+							<article>
 								<div class="form-element">
 									<label>Gender - Optional </label>
 									<input type="radio" id="female" name="gender" value="female" data-validate="optional" tabindex=4>
@@ -53,18 +55,24 @@ get_header(); ?>
 									<label class="radio-label" for="male">Male</label><br>
 									<input type="radio" id="non-binary" name="gender" value="non-binary" data-validate="optional" tabindex=6>
 									<label class="radio-label" for="non-binary">Non Binary</label>
+									<span class="displaying-errors">
+									</span>
 								</div>
 								<div class="form-element">
 									<label>Date of Birth - Please select your date of birth</label>
 									<input type="text" name="dob" class="dob-datepicker" data-validate="optional" tabindex="7">
+									<span class="displaying-errors">
+									</span>
 								</div>
-								<a href="" class="snwb-back" data-goto="1">Back</a>
-								<a href="" class="snwb-next" data-goto="3" tabindex=8>Continue</a>
-							</article> -->
-						<!-- </div> -->
-						<!-- <div class="multipart-section" data-position="3"> -->
-							<!-- <article> -->
-								<!-- 
+								<div class="form-controls">
+									<a href="" class="snwb-back" data-goto="1">Back</a>
+									<a href="" class="snwb-next" data-goto="3" tabindex=8>Continue</a>
+								</div>
+							</article>
+						</div>
+						<div class="multipart-section" data-position="3">
+							<article>
+								
 								<div class="form-element">
 									<label>Would you like to leave a telephone number?</label>
 									<input type="text" name="telephone" data-validate="optional" tabindex="9">
@@ -81,7 +89,7 @@ get_header(); ?>
 									<a href="" class="snwb-back" data-goto="2345">Back</a>
 								<input type="submit" class="snwb-submit" value="Send" tabindex="11">
 								</div>
-							</article> -->
+							</article>
 						</div>
 						<section class="thank-you-box">
 							<div class="thank-you-box-inner">

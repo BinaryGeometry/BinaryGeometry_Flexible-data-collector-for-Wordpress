@@ -109,16 +109,16 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 		// validator._validateOne('comments')
 
 
-	// validator.registerCallback('double_barrel', function(value) {
-	// 	var value = value,
-	// 		valid = /\s/,
-	// 		k = valid.test(value);
+	validator.registerCallback('double_barrel', function(value) {
+		var value = value,
+			valid = /\s/,
+			k = valid.test(value);
 	    
-	//     if (k) {
-	//         return true;
-	//     }
-	//     return false;
-	// }).setMessage('double_barrel', "Please use both names");
+	    if (k) {
+	        return true;
+	    }
+	    return false;
+	}).setMessage('double_barrel', "Please use both names");
 
 	// validator.registerCallback('date', function(value) {
 	//     var value = value,
@@ -149,7 +149,18 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 		var field = field;
 		console.log(field)
 		var $field = $('[name="'+field+'"]'),
-		    $errBox = $field.siblings('.displaying-errors');
+		    $errBox;
+
+		if( $field.siblings('.displaying-errors').length > 0 ){
+		    
+		    $errBox = $field.siblings('.displaying-errors')
+		} else { // hack for zebra-datepicker
+		    $errBox = $field.closest('.Zebra_DatePicker_Icon_Wrapper').siblings('.displaying-errors')
+
+		}
+		console.log(field, $errBox)
+		
+
 		this.state = 'libertentia'
 		$field.unbind('blur');
 		$field.on('blur', function(e){
@@ -159,16 +170,15 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 			if(valid === true){
 				$errBox.removeClass('true').hide(100)
 				this.state = 'valid';
-				// console.log(this.state)
 			} else {
 				message = snwbErrorString(valid);
 				$errBox.html(message).show(100).addClass('true');
 				this.state = 'invalid';
-				// console.log(this.state)
 			} 
 		});
 		return $field;
 	}
+
 	function snwbErrorString(eros){
 		var html = '';
 		for (var i = eros.length - 1; i >= 0; i--) {
@@ -180,15 +190,11 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 		return html;
 	}
 
-	snwbValid('comments');
-	snwbValid('telephone');
-
 	function snwbSectionValidator($section){
-		// var array  = $(section).find('input')
 		var $array  = $section.find(':input')
 		var valid   = 'valid';
 
-		
+		console.log($array.length)
 		$array.each(function(e){
 			var name, comments, validfield;
 			
@@ -235,8 +241,6 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 			
 			var sectionValidator = snwbSectionValidator($target); // possibly should be a singlton
 			
-			console.log('aidsofdsofidof', sectionValidator)
-			
 			if(sectionValidator !== 'invalid'){
 			
 				var tabIndex = (Number( $(this).attr('tabIndex') ) + 1);
@@ -280,10 +284,16 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 		
 		e.preventDefault();
 
-		console.log('blah')
+		var $target = $(this).closest('.multipart-section');
+		var sectionValidator = snwbSectionValidator($target); // possibly should be a singlton
+			
+		if(sectionValidator !== 'invalid'){
+			
+			console.log('blah')
+			var p = submitForm();
 
-	// 	var p = submitForm();
-	// 	console.log('return p', p)
+		}
+
 
 	// 	// $form.trigger('form:submitForm');
 	// 	// var e = $target.trigger('form:submitForm');
