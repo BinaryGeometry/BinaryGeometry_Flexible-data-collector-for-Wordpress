@@ -156,11 +156,11 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 			message
 			
 			if(typeof valid === 'object' && valid.length === 0){
-				$errBox.removeClass('true')
-				console.log('field is okay', valid)
+				$errBox.removeClass('true').hide(100)
+				// console.log('field is okay', valid)
 			} else {
 				message = snwbErrorString(valid);
-				$errBox.html(message).addClass('true');
+				$errBox.html(message).show(100).addClass('true');
 			} 
 		});
 	}
