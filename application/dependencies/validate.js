@@ -372,6 +372,10 @@
     };
 
 
+    /*
+     * @public
+     * Looks at an indivial field and returns error array if unable to return true
+     */
     FormValidator.prototype.validateOne = function(key) {
         var field = this.fields[key] || {},
             element = this.form[field.name];
@@ -406,12 +410,12 @@
                 this._validateField(field);
                 
                 if (this.errors.length > 0){
-                    console.log('eerrs', this.errors)
+                    // console.log('eerrs', this.errors)
 
                     return this.errors;
                 } else {
                     
-                    console.log('no ers')
+                    // console.log('no ers')
 
                     return true;
                 }

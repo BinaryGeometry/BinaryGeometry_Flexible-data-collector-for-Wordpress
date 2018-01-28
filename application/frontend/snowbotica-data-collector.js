@@ -159,12 +159,12 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 			if(valid === true){
 				$errBox.removeClass('true').hide(100)
 				this.state = 'valid';
-				console.log(this.state)
+				// console.log(this.state)
 			} else {
 				message = snwbErrorString(valid);
 				$errBox.html(message).show(100).addClass('true');
 				this.state = 'invalid';
-				console.log(this.state)
+				// console.log(this.state)
 			} 
 		});
 		return $field;
@@ -183,11 +183,28 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 	snwbValid('comments');
 	snwbValid('telephone');
 
-	function snwbSectionValidator(){
-		var comments = snwbValid('name');
-		comments.trigger('blur')
-		var valid = validator.validateOne('name')
-		console.log()
+	function snwbSectionValidator($section){
+		// var array  = $(section).find('input')
+		var $array  = $section.find(':input')
+		var valid   = 'valid';
+
+		
+		$array.each(function(e){
+			var name, comments, validfield;
+			
+			name = $(this).attr('name');
+			console.log('nnnnam', name);
+
+			comments = snwbValid(name);
+			comments.trigger('blur')
+			
+			validfield = validator.validateOne(name);
+			// by defualt our form is invalid 
+			if (typeof validfield == 'object'){
+				valid = 'invalid';
+			} 
+		})
+
 		return valid;
 	}
 
@@ -213,11 +230,14 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 		$formSection.find('.snwb-next').on('click', function(e){
 			e.preventDefault();
 			
-			var sectionValidator = snwbSectionValidator(); // possibly should be a singlton
 			
 			var $target = $(this).closest('.multipart-section');
 			
-			if(typeof snwbSectionValidator() != 'object'){
+			var sectionValidator = snwbSectionValidator($target); // possibly should be a singlton
+			
+			console.log('aidsofdsofidof', sectionValidator)
+			
+			if(sectionValidator !== 'invalid'){
 			
 				var tabIndex = (Number( $(this).attr('tabIndex') ) + 1);
 
