@@ -151,14 +151,13 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 		var $field = $('[name="'+field+'"]'),
 		    $errBox = $field.siblings('.displaying-errors');
 		this.state = 'libertentia'
+		$field.unbind('blur');
 		$field.on('blur', function(e){
 			var valid = validator.validateOne(field),
 			message
 			
 			if(valid === true){
-			// if(typeof valid === 'object' && valid.length === 0){
 				$errBox.removeClass('true').hide(100)
-				// console.log('field is okay', valid)
 				this.state = 'valid';
 				console.log(this.state)
 			} else {
@@ -169,7 +168,7 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 			} 
 		});
 		return {
-			state: this.state
+			state: this.state // pointless useless broken
 		}
 	
 	}
@@ -181,17 +180,21 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 			html += eros[i].message
 			html += '</p>';
 		}
-		console.log(html)
-		console.log('comstate', com.state)
-		console.log('telstate', tel.state)
 		return html;
 	}
-	// snwbValid('comments');
-	var com = new snwbValid('comments');
-	// snwbValid('telephone');
-	var tel = new snwbValid('telephone');
 
+	snwbValid('comments');
+	snwbValid('telephone');
 
+	function snwbSectionValidator(){
+		// if(
+		// 	snwbValid('name') ===  true &&
+		// 	snwbValid('email') === true
+		// ){
+
+			return true;
+		// }
+	}
 
  	var target = '.snwb-multipart-form form .wrapper',
  		$target = $(target),
@@ -214,11 +217,19 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 		// bind handlers to continue button
 		$formSection.find('.snwb-next').on('click', function(e){
 			e.preventDefault();
-			var $target = $(this).closest('.multipart-section');
 			
-			var tabIndex = (Number( $(this).attr('tabIndex') ) + 1);
+			var sectionValidator = snwbSectionValidator(); // possibly should be a singlton
+			
+			if(snwbSectionValidator()){
+				console.log(works)
 
-			$target.trigger('form:moveForward',[position, tabIndex]);
+
+				var $target = $(this).closest('.multipart-section');
+			
+				var tabIndex = (Number( $(this).attr('tabIndex') ) + 1);
+
+				$target.trigger('form:moveForward',[position, tabIndex]);
+			}
 		});
 		// bind handlers to back button
 		$formSection.find('.snwb-back').on('click', function(e){

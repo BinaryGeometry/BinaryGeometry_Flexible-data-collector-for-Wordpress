@@ -27,17 +27,21 @@ get_header(); ?>
 				<form name="snwb_dataCollector_validate_this" id="valid-form">
 					<div class="wrapper">
 						<div class="multipart-section" data-position="1">
-							<!-- <article>
+							<article>
 								<div class="form-element">
 									<label>Your Name - You can't have a one word name</label>
 									<input type="text" name="name" data-validate="required" tabindex=1>
+									<span class="displaying-errors">
+									</span>
 								</div>
 								<div class="form-element">
 									<label>Your Email - Your email address must be real</label>
 									<input type="email" name="email" data-validate="required email" tabindex=2>
+									<span class="displaying-errors">
+									</span>
 								</div>
 								<a href="" class="snwb-next" tabindex=3>Continue</a>
-							</article> -->
+							</article>
 						<!-- </div> -->
 						<!-- <div class="multipart-section" data-position="2"> -->
 							<!-- <article>
@@ -59,8 +63,8 @@ get_header(); ?>
 							</article> -->
 						<!-- </div> -->
 						<!-- <div class="multipart-section" data-position="3"> -->
-							<article>
-								
+							<!-- <article> -->
+								<!-- 
 								<div class="form-element">
 									<label>Would you like to leave a telephone number?</label>
 									<input type="text" name="telephone" data-validate="optional" tabindex="9">
@@ -77,7 +81,7 @@ get_header(); ?>
 									<a href="" class="snwb-back" data-goto="2345">Back</a>
 								<input type="submit" class="snwb-submit" value="Send" tabindex="11">
 								</div>
-							</article>
+							</article> -->
 						</div>
 						<section class="thank-you-box">
 							<div class="thank-you-box-inner">
