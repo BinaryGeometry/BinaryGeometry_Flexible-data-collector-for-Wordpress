@@ -167,10 +167,7 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 				console.log(this.state)
 			} 
 		});
-		return {
-			state: this.state // pointless useless broken
-		}
-	
+		return $field;
 	}
 	function snwbErrorString(eros){
 		var html = '';
@@ -187,13 +184,11 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 	snwbValid('telephone');
 
 	function snwbSectionValidator(){
-		// if(
-		// 	snwbValid('name') ===  true &&
-		// 	snwbValid('email') === true
-		// ){
-
-			return true;
-		// }
+		var comments = snwbValid('name');
+		comments.trigger('blur')
+		var valid = validator.validateOne('name')
+		console.log()
+		return valid;
 	}
 
  	var target = '.snwb-multipart-form form .wrapper',
@@ -220,11 +215,9 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 			
 			var sectionValidator = snwbSectionValidator(); // possibly should be a singlton
 			
-			if(snwbSectionValidator()){
-				console.log(works)
-
-
-				var $target = $(this).closest('.multipart-section');
+			var $target = $(this).closest('.multipart-section');
+			
+			if(typeof snwbSectionValidator() != 'object'){
 			
 				var tabIndex = (Number( $(this).attr('tabIndex') ) + 1);
 
