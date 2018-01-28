@@ -86,11 +86,11 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 	    	display: 'Date of Birth',
 	    	rules: 'required|callback_date'
 		},
-		// {
-	 //    	name: 'telephone',
-	 //    	display: 'Telephone number',
-	 //    	rules: 'required|numeric'
-		// },
+		{
+	    	name: 'telephone',
+	    	display: 'Telephone number',
+	    	rules: 'required|numeric'
+		},
 		{
 	    	name: 'comments',
 	    	display: 'Comments',
@@ -146,23 +146,25 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 	});
 
 	var snwbValid = function(field){
-		// console.log('valid', field)
+		var field = field;
+		console.log(field)
 		var $field = $('[name="'+field+'"]'),
 		    $errBox = $field.siblings('.displaying-errors');
-		// console.log($field.length)
-		$field.on('blur', function(e, field){
-			// validator.validateOne('comments')
-			// if(validator.validateOne(field)){
-				// $errBox.removeClass('true')
-			// } else {
-				$errBox.addClass('true');
-			// }
+		
+		$field.on('blur', function(e){
+			var valid = validator.validateOne(field);
+			if(typeof valid === 'object' && valid.length === 0){
+				$errBox.removeClass('true')
+				console.log('field is okay', valid)
+			} else {
+				$errBox.addClass('true')
+				console.log('errors in field', valid)
+			} 
 		});
 	}
 	snwbValid('comments');
 	snwbValid('telephone');
 
-	// validator.validateOne('comments')
 
 
  	var target = '.snwb-multipart-form form .wrapper',
