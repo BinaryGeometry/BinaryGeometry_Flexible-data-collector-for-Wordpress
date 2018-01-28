@@ -60,8 +60,9 @@ function snwb_datacollector_save_form(){
   // zoom big and fade form page
   // zoom normal from small and fade in other page
 
-  $domain = get_site_url();
-  $url = $domain.'/'.SNwB_DATACOLLECTOR_SLUG.'/'.$post_id;
+ $domain = get_site_url();
+  // $url = $domain.'/'.SNwB_DATACOLLECTOR_SLUG.'/'.$post_id;
+  $url = get_permalink($post_id);
   $link = "<a href='$url'>Go to data</a>";
   echo $link;
   // echo "Thank you - you are number $post_id. Someone will be in touch shortly";
