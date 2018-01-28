@@ -152,15 +152,28 @@ var snwbDatacollectorAjaxUrl = window.snwb_datacollector_api_object.ajax_url;
 		    $errBox = $field.siblings('.displaying-errors');
 		
 		$field.on('blur', function(e){
-			var valid = validator.validateOne(field);
+			var valid = validator.validateOne(field),
+			message
+			
 			if(typeof valid === 'object' && valid.length === 0){
 				$errBox.removeClass('true')
 				console.log('field is okay', valid)
 			} else {
-				$errBox.addClass('true')
-				console.log('errors in field', valid)
+				message = snwbErrorString(valid);
+				$errBox.html(message).addClass('true');
 			} 
 		});
+	}
+	function snwbErrorString(eros){
+		var html = '';
+		for (var i = eros.length - 1; i >= 0; i--) {
+			console.log(i, eros[i], html)
+			html += '<p>';
+			html += eros[i].message
+			html += '</p>';
+		}
+		console.log(html)
+		return html;
 	}
 	snwbValid('comments');
 	snwbValid('telephone');

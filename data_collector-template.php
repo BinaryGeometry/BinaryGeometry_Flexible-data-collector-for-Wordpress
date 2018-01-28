@@ -63,17 +63,14 @@ get_header(); ?>
 								
 								<div class="form-element">
 									<label>Would you like to leave a telephone number?</label>
-									<input type="number" name="telephone" data-validate="optional" tabindex="9">
-									<span class="displaying-errors false">
-										<p>Your telephone number is incorrect</p>
-										<p>Your errors are unsumountable</p>
+									<input type="text" name="telephone" data-validate="optional" tabindex="9">
+									<span class="displaying-errors">
 									</span>
 								</div>
 								<div class="form-element">
 									<label>Any comments?</label>
 									<textarea name="comments" data-validate="optional" tabindex="10"></textarea>
-									<span class="displaying-errors false">
-										<p>Your comments are not long enough</p>
+									<span class="displaying-errors">
 									</span>
 								</div>
 								<div class="form-controls">

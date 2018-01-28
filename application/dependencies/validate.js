@@ -280,7 +280,7 @@
             rules = field.rules.split('|'),
             indexOfRequired = field.rules.indexOf('required'),
             isEmpty = (!field.value || field.value === '' || field.value === undefined);
-console.log('validating', this.errors)
+// console.log('validating', this.errors)
         /*
          * Run through the rules and execute the validation methods as needed
          */
